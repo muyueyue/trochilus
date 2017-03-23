@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 对html解析的类，获取符合用户的内容
+ * 对Html解析的类，获取符合用户的内容
  * Created by pjh on 2017/2/10.
  */
 public class Select {
