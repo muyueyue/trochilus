@@ -21,6 +21,8 @@ public class ThreadPool {
 
     private Condition condition = reentrantLock.newCondition();
 
+    private ExecutorService executorService;
+
     public ThreadPool(int threadNum) {
         this.threadNum = threadNum;
         this.executorService = Executors.newFixedThreadPool(threadNum);
@@ -43,11 +45,7 @@ public class ThreadPool {
         return threadNum;
     }
 
-    private ExecutorService executorService;
-
     public void execute(final Runnable runnable) {
-
-
         if (threadAlive.get() >= threadNum) {
             try {
                 reentrantLock.lock();

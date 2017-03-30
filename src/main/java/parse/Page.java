@@ -22,12 +22,6 @@ public class Page {
 
     private String json;
 
-    public List<Request> getTargetRequests() {
-        return targetRequests;
-    }
-
-    private List<Request> targetRequests = new ArrayList<Request>();
-
     public Page(String url, Html html){
             this.url = url;
             this.html = html;
@@ -56,30 +50,6 @@ public class Page {
 
     public Page setHtml(Html html){
         this.html = html;
-        return this;
-    }
-
-
-    /**
-     * 将传入的地址添加到目标队列中
-     * @param linkList
-     * @param method
-     * @return
-     */
-    public Page setTargetRequests(List<String> linkList, Method method){
-        if(linkList == null){
-            logger.error("待爬取的地址不能为空");
-            return this;
-        }
-        synchronized (this.targetRequests){
-            for(String link : linkList){
-                if(StringUtil.isEmpty(link) || !StringUtil.isURL(link)){
-                    continue;
-                }
-                Request request = new Request(link, method);
-                this.targetRequests.add(request);
-            }
-        }
         return this;
     }
 }

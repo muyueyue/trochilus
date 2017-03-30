@@ -26,9 +26,7 @@ public class Spider {
         HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
         Html html = new Html(httpClientDownloader.getHtml(statrRequest));
         Page page = new Page(statrRequest.getUrl(), html);
-        page.setTargetRequests(html.linksForRegx("[a-zA-z]+://[^\\s]*"), Method.GET);
+        /*page.setTargetRequests(html.linksForRegx("[a-zA-z]+://[^\\s]*"), Method.GET);*/
 
-        
-        logger.info("目标队列的大小： {}", page.getTargetRequests().size());
     }
 }

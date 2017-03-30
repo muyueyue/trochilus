@@ -22,5 +22,5 @@ public class Config {
 
     public static String databaseName = "spiders";
 
-    public static String dbCollection = "test";
+    public static String dbCollection = "spiders";
 }
