@@ -28,6 +28,9 @@ public class HttpClientDownloader implements  Downloader{
     @Override
     public String getHtml(Request request){
         try{
+            if(request == null){
+                return null;
+            }
             logger.info("正在爬取 {} 页面", request.getUrl());
             HttpResponse httpResponse = request.send();
             if(httpResponse == null || httpResponse.getEntity() == null){
@@ -43,7 +46,6 @@ public class HttpClientDownloader implements  Downloader{
                 charSet = "UTF-8";
             }
             String html = new String(bytes, charSet);
-            logger.info("页面源码为 {}", html);
             return html;
         }catch (IOException e){
             logger.error("获取网页源代码出错：{}", e.toString());

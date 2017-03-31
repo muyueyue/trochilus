@@ -44,7 +44,6 @@ public class BloomFilter {
         }
     }
 
-
     public void add(String url) {    //bloom filter 添加url值
         for (Hash f : func) bits.set(f.hash(url), true);
     }
@@ -55,7 +54,6 @@ public class BloomFilter {
         for (Hash f : func) ret = ret && bits.get(f.hash(value));
         return ret;
     }
-
 
     public static void main(String[] args) {
         String[] urls = new String[]{"addsdsdfdvcuuyttyetrmnmnkywdgds","addsdsdfdvcuuyttyetrmnmnkywdgds","addssdfdvcuuyttyetrmnmnkywdgds","addsdds"};  //测试数据

@@ -5,10 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import parse.Html;
 import parse.Page;
+import parse.Select;
+import thread.SpidersTask;
+import thread.URLQueue;
 import utils.Method;
 import utils.Request;
-
-import java.util.List;
 
 /**
  * 爬虫的入口
@@ -18,15 +19,11 @@ public class Spider {
 
     private static final Logger logger = LoggerFactory.getLogger(Spider.class);
 
-
-
     public static void main(String[] args){
-
-        Request statrRequest = new Request("http://news.baidu.com/", Method.GET);
-        HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
-        Html html = new Html(httpClientDownloader.getHtml(statrRequest));
-        Page page = new Page(statrRequest.getUrl(), html);
-        /*page.setTargetRequests(html.linksForRegx("[a-zA-z]+://[^\\s]*"), Method.GET);*/
-
+        URLQueue queue = URLQueue.getInstance();
+        queue.addURLToTargetQueue("http://news.baidu.com/");
+        SpidersTask task = new SpidersTask();
+        Thread thread = new Thread(task);
+        thread.start();
     }
 }

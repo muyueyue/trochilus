@@ -2,14 +2,16 @@ package thread;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.StringUtil;
 
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
-
 /**
  * 单例
- * targetQueue存储待爬取的url
- * finishQueue存储已爬取的url
+ * targetQueue存储待爬取的url队列
+ * finishQueue存储已爬取的url队列
+ * 一系列操作队列的方法
  * Created by jiahao on 17-3-30.
  */
 public class URLQueue {
@@ -45,6 +47,10 @@ public class URLQueue {
     }
 
     public Boolean isInTargetQueue(String url){
+        if(StringUtil.isEmpty(url)){
+            return null;
+        }
+
         if(targetQueue.contains(url)){
             return true;
         }
@@ -52,6 +58,9 @@ public class URLQueue {
     }
 
     public Boolean isInFinishQueue(String url){
+        if(StringUtil.isEmpty(url)){
+            return null;
+        }
         if(finishQueue.contains(url)){
             return true;
         }
@@ -64,6 +73,38 @@ public class URLQueue {
 
     public long getFinishQueueSize(){
         return finishQueue.size();
+    }
+
+    public void addURLToTargetQueue(List<String> url){
+        if(url == null || url.size() == 0){
+            return;
+        }
+        for(String string : url){
+            if(isInTargetQueue(string) || isInFinishQueue(string)){
+                continue;
+            }
+            targetQueue.offer(string);
+            logger.info("向待爬取队列中添加URL: {}", string);
+        }
+    }
+
+    public void addURLToTargetQueue(String url){
+        if(StringUtil.isNotURL(url)){
+            return;
+        }
+        if(isInTargetQueue(url) || isInFinishQueue(url)){
+            return;
+        }
+        targetQueue.offer(url);
+        logger.info("向待爬取队列中添加URL: {}", url);
+    }
+
+    public void addURLToFinishQueue(String url){
+        if(StringUtil.isNotURL(url)){
+            return;
+        }
+        finishQueue.offer(url);
+        logger.info("向已完成队列中添加URL: {}", url);
     }
 
     public BlockingQueue<String> getTargetQueue(){

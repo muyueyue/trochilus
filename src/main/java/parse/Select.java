@@ -37,6 +37,9 @@ public class Select {
     }
 
     public List<String> links(Document document){
+        if(document == null){
+            return null;
+        }
         Elements elements = document.select("a[href]");
         List<String> links = new ArrayList<>();
         String regex = "[a-zA-z]+://[^\\s]*";
