@@ -38,4 +38,9 @@ public class Html {
         Select select = new Select();
         return select.links(this.document, regx);
     }
+
+    public List<String> select(String xPath){
+        Select select = new Select();
+        return select.select(this.document, xPath);
+    }
 }

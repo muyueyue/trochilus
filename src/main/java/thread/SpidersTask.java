@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import parse.Html;
 import parse.Page;
 import parse.Select;
+import persistence.ConsolePrint;
 import utils.Method;
 import utils.Request;
 
@@ -26,9 +27,9 @@ public class SpidersTask implements Runnable {
                 Request request = new Request(url, Method.GET);
                 HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
                 Html html = new Html(httpClientDownloader.getHtml(request));
-                Page page = new Page(request.getUrl(), html);
-                Select select = new Select(page);
-                urlQueue.addURLToTargetQueue(select.links(html.getDocument()));
+                ConsolePrint consolePrint = new ConsolePrint(html);
+                consolePrint.printByXpath("title", "//li[@class='bold-item']/a/text()");
+                urlQueue.addURLToTargetQueue(html.allLinks());
                 urlQueue.addURLToFinishQueue(url);
                 Thread.sleep(500);
             }catch (Exception e){

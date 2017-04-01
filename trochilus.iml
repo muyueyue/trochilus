@@ -19,5 +19,7 @@
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: com.ibm.icu:icu4j:57.1" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.2.2" level="project" />
+    <orderEntry type="library" name="Maven: us.codecraft:xsoup:0.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.assertj:assertj-core:1.5.0" level="project" />
   </component>
 </module>
