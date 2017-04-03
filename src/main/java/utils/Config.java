@@ -23,4 +23,6 @@ public class Config {
     public static String databaseName = "spiders";
 
     public static String dbCollection = "spiders";
+
+    public static long errorSleepTime = 10000;
 }

@@ -10,6 +10,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 /**
  * 单例
  * targetQueue存储待爬取的url队列
+ * startQueue起始爬取的url队列
  * finishQueue存储已爬取的url队列
  * 一系列操作队列的方法
  * Created by jiahao on 17-3-30.
@@ -22,10 +23,13 @@ public class URLQueue {
 
     private BlockingQueue<String> targetQueue;
 
+    private BlockingQueue<String> startQueue;
+
     private BlockingQueue<String> finishQueue;
 
     private URLQueue(){
         targetQueue = new LinkedBlockingDeque();
+        startQueue = new LinkedBlockingDeque<>();
         finishQueue = new LinkedBlockingDeque();
     }
 
@@ -41,6 +45,10 @@ public class URLQueue {
         logger.info("目标队列已清空");
     }
 
+    public void clearStartQueue(){
+        startQueue.clear();
+        logger.info("真实要爬取的URL队列已清空");
+    }
     public void clearFinishQueue(){
         finishQueue.clear();
         logger.info("已爬取队列已清空");
@@ -52,6 +60,17 @@ public class URLQueue {
         }
 
         if(targetQueue.contains(url)){
+            return true;
+        }
+        return false;
+    }
+
+    public  Boolean isInStartQueue(String url){
+        if(StringUtil.isEmpty(url)){
+            return null;
+        }
+
+        if(startQueue.contains(url)){
             return true;
         }
         return false;
@@ -71,6 +90,8 @@ public class URLQueue {
         return targetQueue.size();
     }
 
+    public long getStartQueueSize(){return startQueue.size();}
+
     public long getFinishQueueSize(){
         return finishQueue.size();
     }
@@ -80,7 +101,7 @@ public class URLQueue {
             return;
         }
         for(String string : url){
-            if(isInTargetQueue(string) || isInFinishQueue(string)){
+            if(isInTargetQueue(string) || isInStartQueue(string) || isInFinishQueue(string)){
                 continue;
             }
             targetQueue.offer(string);
@@ -88,15 +109,39 @@ public class URLQueue {
         }
     }
 
+    public void addToStartQueue(List<String> url){
+        if(url == null || url.size() == 0){
+            return;
+        }
+        for(String string : url){
+            if(isInTargetQueue(string) || isInStartQueue(string) || isInFinishQueue(string)){
+                continue;
+            }
+            startQueue.offer(string);
+            logger.info("向真实URL队列中添加成功： {}", string);
+        }
+    }
+
     public void addURLToTargetQueue(String url){
         if(StringUtil.isNotURL(url)){
             return;
         }
-        if(isInTargetQueue(url) || isInFinishQueue(url)){
+        if(isInTargetQueue(url) || isInStartQueue(url) || isInFinishQueue(url)){
             return;
         }
         targetQueue.offer(url);
         logger.info("向待爬取队列中添加URL: {}", url);
+    }
+
+    public void addToStartQueue(String url){
+        if(StringUtil.isNotURL(url)){
+            return;
+        }
+        if(isInTargetQueue(url) || isInStartQueue(url) || isInFinishQueue(url)){
+            return;
+        }
+        startQueue.offer(url);
+        logger.info("向真实URL队列中添加成功： {}", url);
     }
 
     public void addURLToFinishQueue(String url){
@@ -109,6 +154,10 @@ public class URLQueue {
 
     public BlockingQueue<String> getTargetQueue(){
         return targetQueue;
+    }
+
+    public BlockingQueue<String> getStartQueue() {
+        return startQueue;
     }
 
     public BlockingQueue<String> getFinishQueue(){

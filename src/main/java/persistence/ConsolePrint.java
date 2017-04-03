@@ -89,9 +89,9 @@ public class ConsolePrint {
         }
         Result result = new Result(this.html);
         List<String> values = result.select(xPath);
+        System.out.println(key + ":");
         for(String string : values){
-            System.out.println("key: " + key);
-            System.out.println("value: " + string);
+            System.out.println(string);
         }
     }
 }
