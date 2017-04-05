@@ -31,8 +31,7 @@ public class CrawlTargetQueueTask implements Runnable{
                 Request request = new Request(targetUrl, Method.GET);
                 Html html = new Html(Downloader.getHtml(request));
                 ConsolePrint consolePrint = new ConsolePrint(html);
-                consolePrint.printByXpath("title", "//title/text()");
-                consolePrint.printByXpath("content", "//div[@id='ctrlfscont']/p/text()");
+                consolePrint.printByXpath("content", "//div[@id=zoom]/p/text()");
             }
         }catch (Exception e){
             logger.error("爬虫任务出错: {}", e);

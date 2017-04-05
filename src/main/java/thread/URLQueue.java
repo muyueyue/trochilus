@@ -47,7 +47,7 @@ public class URLQueue {
 
     public void clearStartQueue(){
         startQueue.clear();
-        logger.info("真实要爬取的URL队列已清空");
+        logger.info("起始URL队列已清空");
     }
     public void clearFinishQueue(){
         finishQueue.clear();
@@ -101,7 +101,7 @@ public class URLQueue {
             return;
         }
         for(String string : url){
-            if(isInTargetQueue(string) || isInStartQueue(string) || isInFinishQueue(string)){
+            if(StringUtil.isNotURL(string) || isInTargetQueue(string) || isInStartQueue(string) || isInFinishQueue(string)){
                 continue;
             }
             targetQueue.offer(string);
@@ -114,16 +114,16 @@ public class URLQueue {
             return;
         }
         for(String string : url){
-            if(isInTargetQueue(string) || isInStartQueue(string) || isInFinishQueue(string)){
+            if(StringUtil.isNotURL(string) || isInTargetQueue(string) || isInStartQueue(string) || isInFinishQueue(string)){
                 continue;
             }
             startQueue.offer(string);
-            logger.info("向真实URL队列中添加成功： {}", string);
+            logger.info("向起始队列中添加成功： {}", string);
         }
     }
 
     public void addURLToTargetQueue(String url){
-        if(StringUtil.isNotURL(url)){
+        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
             return;
         }
         if(isInTargetQueue(url) || isInStartQueue(url) || isInFinishQueue(url)){
@@ -134,18 +134,18 @@ public class URLQueue {
     }
 
     public void addToStartQueue(String url){
-        if(StringUtil.isNotURL(url)){
+        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
             return;
         }
         if(isInTargetQueue(url) || isInStartQueue(url) || isInFinishQueue(url)){
             return;
         }
         startQueue.offer(url);
-        logger.info("向真实URL队列中添加成功： {}", url);
+        logger.info("向起始队列中添加成功： {}", url);
     }
 
     public void addURLToFinishQueue(String url){
-        if(StringUtil.isNotURL(url)){
+        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
             return;
         }
         finishQueue.offer(url);

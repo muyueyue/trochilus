@@ -17,8 +17,8 @@ public class Spider {
 
     public static void main(String[] args){
         URLQueue urlQueue = URLQueue.getInstance();
-        urlQueue.addToStartQueue("http://news.baidu.com/");
-        CrawlStartURLQueueTask crawlStartURLQueueTask = new CrawlStartURLQueueTask("//ul[@class='ulist focuslistnews']/li/a/@href");
+        urlQueue.addToStartQueue("http://news.jxufe.cn/");
+        CrawlStartURLQueueTask crawlStartURLQueueTask = new CrawlStartURLQueueTask("//ul/li/a/@href");
         Thread startThread = new Thread(crawlStartURLQueueTask);
         startThread.start();
         CrawlTargetQueueTask crawlTargetQueueTask = new CrawlTargetQueueTask();
