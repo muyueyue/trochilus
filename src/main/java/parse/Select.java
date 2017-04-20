@@ -106,7 +106,7 @@ public class Select {
         return links;
     }
 
-    public List<String> select(Document document, String xPath){
+    public List<String> xPath(Document document, String xPath){
         if(document == null || StringUtil.isEmpty(xPath)){
             return null;
         }

@@ -34,13 +34,13 @@ public class Html {
         return select.links(this.document);
     }
 
-    public List<String> linksForRegx(String regx){
+    public List<String> links(String regex){
         Select select = new Select();
-        return select.links(this.document, regx);
+        return select.links(this.document, regex);
     }
 
-    public List<String> select(String xPath){
+    public List<String> xPath(String xPath){
         Select select = new Select();
-        return select.select(this.document, xPath);
+        return select.xPath(this.document, xPath);
     }
 }
