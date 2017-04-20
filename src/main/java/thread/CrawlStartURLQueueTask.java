@@ -35,9 +35,7 @@ public class CrawlStartURLQueueTask implements Runnable{
                 }
                 Request  request = new Request(startUrl, Method.GET);
                 Html html = new Html(Downloader.getHtml(request));
-                ConsolePrint consolePrint = new ConsolePrint(html);
-                consolePrint.printByXpath("targetUrl", this.xPath);
-                urlQueue.addURLToTargetQueue(html.select(this.xPath));
+                urlQueue.addURLToTargetQueue(html.xPath(this.xPath));
                 urlQueue.addURLToFinishQueue(startUrl);
             }
         }catch (Exception e){

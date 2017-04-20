@@ -8,11 +8,8 @@ import thread.CrawlStartURLQueueTask;
 import thread.CrawlTargetQueueTask;
 import thread.ThreadPool;
 import thread.URLQueue;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 爬虫的入口
