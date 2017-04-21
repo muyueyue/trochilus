@@ -34,7 +34,7 @@ public class CrawlStartURLQueueTask implements Runnable{
                     Thread.sleep(Config.errorSleepTime);
                 }
                 Request  request = new Request(startUrl, Method.GET);
-                Html html = new Html(Downloader.getHtml(request));
+                Html html = Downloader.getHtml(request);
                 urlQueue.addURLToTargetQueue(html.xPath(this.xPath));
                 urlQueue.addURLToFinishQueue(startUrl);
             }

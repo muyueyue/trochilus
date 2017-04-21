@@ -26,5 +26,7 @@ public class Config {
 
     public static String dbCollection = "spiders";
 
+    public static String filePath = "";
+
     public static long errorSleepTime = 10000;
 }

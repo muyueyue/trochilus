@@ -17,5 +17,7 @@ public class DataPersistence {
 
     private static final Logger logger = LoggerFactory.getLogger(DataPersistence.class);
 
-
+    public static void insert(String key, String value){
+        MongoDBJDBC.insert(key, value);
+    }
 }

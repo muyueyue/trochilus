@@ -31,19 +31,19 @@ public class Html {
         return this.document;
     }
 
-    public List<String> allLinks(){
-        Select select = new Select();
-        return select.links(this.document);
+    public List<String> xPath(String xPath){
+        return Select.xPath(this.document, xPath);
+    }
+
+    public List<String> regex(String regex){
+        return Select.regex(regex);
+    }
+    public List<String> links(){
+        return Select.links(this.document);
     }
 
     public List<String> links(String regex){
-        Select select = new Select();
-        return select.links(this.document, regex);
-    }
-
-    public List<String> xPath(String xPath){
-        Select select = new Select();
-        return select.xPath(this.document, xPath);
+        return Select.links(this.document, regex);
     }
 
 }

@@ -7,6 +7,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import parse.Html;
 import utils.Request;
 import utils.Util;
 
@@ -21,7 +22,7 @@ public class Downloader {
 
     private static final Logger logger = LoggerFactory.getLogger(Downloader.class);
 
-    public static String getHtml(Request request){
+    public static Html getHtml(Request request){
         try{
             if(request == null){
                 return null;
@@ -41,7 +42,10 @@ public class Downloader {
                 charSet = "UTF-8";
             }
             String html = new String(bytes, charSet);
-            return html;
+            if(html == null){
+                return null;
+            }
+            return new Html(html);
         }catch (IOException e){
             logger.error("获取网页源代码出错：{}", e.toString());
             return null;

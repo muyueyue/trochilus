@@ -1,5 +1,6 @@
 package persistence;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -66,5 +67,20 @@ public class MongoDBJDBC {
         getMongoDatabase();
         MongoCollection<Document> collection = mongoDatabase.getCollection(Config.dbCollection);
         collection.insertMany(list);
+    }
+
+    public static void insert(Document document){
+        getMongoDatabase();
+        MongoCollection<Document> collection = mongoDatabase.getCollection(Config.dbCollection);
+        collection.insertOne(document);
+    }
+
+    public static void insert(JSONObject jsonObject){
+        Document document = new Document();
+        for(Map.Entry<String, Object> entry : jsonObject.entrySet()){
+            document.append(entry.getKey(), (String)entry.getValue());
+        }
+        MongoCollection<Document> collection = mongoDatabase.getCollection(Config.dbCollection);
+        collection.insertOne(document);
     }
 }

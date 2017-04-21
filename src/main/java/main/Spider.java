@@ -1,6 +1,7 @@
 package main;
 
 import com.alibaba.fastjson.JSONObject;
+import exception.DBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import persistence.Result;
@@ -8,6 +9,9 @@ import thread.CrawlStartURLQueueTask;
 import thread.CrawlTargetQueueTask;
 import thread.ThreadPool;
 import thread.URLQueue;
+import utils.Config;
+import utils.ParseMethod;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,19 +63,32 @@ public class Spider {
         return this;
     }
 
-    public Spider db(){
+    public Spider db(JSONObject dbConfig) throws DBException{
         if(this.persistence.contains("db")){
             return this;
         }
+        if(!dbConfig.containsKey("mongoDBHost") ||
+                !dbConfig.containsKey("databaseName") ||
+                !dbConfig.containsKey("dbCollection")){
+            throw new DBException("数据库配置文件异常");
+        }
+        Config.mongoDBHost = dbConfig.getString("mongoDBHost");
+        if(dbConfig.containsKey("mongoDBPort")){
+            Config.mongoDBPort = dbConfig.getIntValue("mongoDBPort");
+
+        }
+        Config.databaseName = dbConfig.getString("databaseName");
+        Config.dbCollection = dbConfig.getString("dbCollection");
         this.persistence.add("db");
         return this;
     }
 
-    public Spider file(){
+    public Spider file(String filePath){
         if(this.persistence.contains("file")){
             return this;
         }
         this.persistence.add("file");
+        Config.filePath = filePath;
         return this;
     }
 
@@ -91,9 +108,9 @@ public class Spider {
         return this;
     }
 
-    public Spider putField(String key, String regex, String method){
+    public Spider putField(String key, String regex, ParseMethod method){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.fluentPut("key", key).fluentPut("regex", regex).fluentPut("method", method);
+        jsonObject.fluentPut("key", key).fluentPut("regex", regex).fluentPut("method", method.toString());
         this.keyRegexMethod.add(jsonObject);
         return this;
     }

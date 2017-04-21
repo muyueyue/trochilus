@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.List;
 
 /**
  * 关于对字符串操作的工具类
@@ -134,5 +135,21 @@ public class StringUtil {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 将一个List<String>转化为一个String
+     * @param list
+     * @return
+     */
+    public static String listToString(List<String> list){
+        if(list == null){
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for(String string : list){
+            stringBuilder.append(string + '\n');
+        }
+        return stringBuilder.toString();
     }
 }

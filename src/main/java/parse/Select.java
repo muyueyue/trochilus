@@ -1,6 +1,5 @@
 package parse;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -22,10 +21,7 @@ public class Select {
 
     private static final Logger logger = LoggerFactory.getLogger(Select.class);
 
-    public Select(){}
-
-
-    public List<String> links(Document document){
+    public static List<String> links(Document document){
         if(document == null){
             return null;
         }
@@ -43,7 +39,7 @@ public class Select {
     }
 
 
-    public List<String> links(Document document, String regex){
+    public static List<String> links(Document document, String regex){
         if(document == null){
             return null;
         }
@@ -59,7 +55,7 @@ public class Select {
         return links;
     }
 
-    public List<String> xPath(Document document, String xPath){
+    public static List<String> xPath(Document document, String xPath){
         if(document == null || StringUtil.isEmpty(xPath)){
             return null;
         }
@@ -67,4 +63,7 @@ public class Select {
         return stringList;
     }
 
+    public static List<String> regex(String regex){
+        return null;
+    }
 }
