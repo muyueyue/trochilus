@@ -14,6 +14,8 @@ import java.util.concurrent.LinkedBlockingDeque;
  * finishQueue存储已爬取的url队列
  * 一系列操作队列的方法
  * Created by jiahao on 17-3-30.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public class URLQueue {
 

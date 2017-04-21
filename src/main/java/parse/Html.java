@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Created by pjh on 2017/2/10.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public class Html {
 
@@ -43,4 +45,5 @@ public class Html {
         Select select = new Select();
         return select.xPath(this.document, xPath);
     }
+
 }

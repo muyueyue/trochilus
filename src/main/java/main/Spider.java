@@ -14,6 +14,8 @@ import java.util.List;
 /**
  * 爬虫的入口
  * Created by pjh on 2017/1/22.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public class Spider {
 
@@ -25,14 +27,15 @@ public class Spider {
 
     private Result result;
 
-    private String pip;
+    private List<String> persistence;
 
     private List<JSONObject> keyRegexMethod;
 
     public void Spider(){
         this.result = new Result();
-        this.pip = "console";
+        this.persistence = new ArrayList<>();
         this.keyRegexMethod = new ArrayList<>();
+        this.persistence.add("console");
     }
 
     public Spider addStartUrl(String startUrl){
@@ -57,17 +60,26 @@ public class Spider {
     }
 
     public Spider db(){
-        this.pip = "db";
+        if(this.persistence.contains("db")){
+            return this;
+        }
+        this.persistence.add("db");
         return this;
     }
 
     public Spider file(){
-        this.pip = "file";
+        if(this.persistence.contains("file")){
+            return this;
+        }
+        this.persistence.add("file");
         return this;
     }
 
     public Spider console(){
-        this.pip = "console";
+        if(this.persistence.contains("console")){
+            return this;
+        }
+        this.persistence.add("console");
         return this;
     }
 
@@ -88,7 +100,7 @@ public class Spider {
 
     public void run(){
         for(int i = 0; i < this.threadNum; i++){
-            CrawlTargetQueueTask crawlTargetQueueTask = new CrawlTargetQueueTask(this.keyRegexMethod, this.pip);
+            CrawlTargetQueueTask crawlTargetQueueTask = new CrawlTargetQueueTask(this.keyRegexMethod, this.persistence);
             ThreadPool.getInstance().execute(crawlTargetQueueTask);
         }
     }

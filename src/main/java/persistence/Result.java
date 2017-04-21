@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by jiahao on 17-4-1.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public class Result {
 

@@ -9,6 +9,8 @@ import java.io.*;
  * 关于对字符串操作的工具类
  * 包含对字符串操作的常用方法
  * Created by pjh on 2017/1/22.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public class StringUtil {
 

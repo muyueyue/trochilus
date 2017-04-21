@@ -4,6 +4,8 @@ package utils;
  *  HTTP请求方法
  * 目前只用到了POST和GET方法
  * Created by pjh on 2017/1/22.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public enum Method {
     POST,

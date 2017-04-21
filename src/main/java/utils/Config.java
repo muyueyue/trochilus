@@ -3,6 +3,8 @@ package utils;
 /**
  * 全局的配置类
  * Created by pjh on 2017/1/28.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public class Config {
 

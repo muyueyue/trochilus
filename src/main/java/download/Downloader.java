@@ -14,6 +14,8 @@ import java.io.IOException;
 
 /**
  * Created by pjh on 2017/1/22.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public class Downloader {
 

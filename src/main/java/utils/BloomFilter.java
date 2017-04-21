@@ -7,6 +7,9 @@ import java.util.BitSet;
 
 /**
  * Created by pjh on 2017/2/4.
+ *
+ * @author jiahao.pjh@gmail.com
+ *
  * 布隆过滤器（Bloom Filter）是1970年由Burton Howard Bloom提出的。
  * 它实际上是一个很长的二进制向量和一系列随机映射函数。
  * 布隆过滤器可以用于检索一个元素是否在一个集合中。

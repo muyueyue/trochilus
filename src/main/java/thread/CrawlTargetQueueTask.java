@@ -5,11 +5,9 @@ import download.Downloader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import parse.Html;
-import persistence.ConsolePrint;
 import utils.Config;
 import utils.Method;
 import utils.Request;
-
 import java.util.List;
 
 /**
@@ -23,11 +21,11 @@ public class CrawlTargetQueueTask implements Runnable{
 
     private List<JSONObject> keyRegexMethod;
 
-    private String pip;
+    private List<String> persistence;
 
-    public CrawlTargetQueueTask(List<JSONObject> keyRegexMethod, String pip){
+    public CrawlTargetQueueTask(List<JSONObject> keyRegexMethod, List<String> persistence){
         this.keyRegexMethod = keyRegexMethod;
-        this.pip = pip;
+        this.persistence = persistence;
     }
 
     @Override

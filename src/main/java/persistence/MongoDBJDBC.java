@@ -16,6 +16,8 @@ import java.util.Map;
 /**
  * 获取MongoDB连接及相关操作
  * Created by pjh on 2017/2/10.
+ *
+ * @author jiahao.pjh@gmail.com
  */
 public class MongoDBJDBC {
 
