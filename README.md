@@ -5,10 +5,9 @@ This framework provides some sort of crawler operations that allow users to comp
 
 ## Get started
 
----
+### You can start a crawler by creating a new Spider object and setting the crawler's related business information.
 
-### As follows:
-
+#### As follows:
 ```
 public class SpiderTest {
     public static void main(String[] args){
