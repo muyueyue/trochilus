@@ -1,5 +1,6 @@
 package persistence;
 
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import parse.Html;
@@ -22,8 +23,11 @@ public class ConsolePrint {
     private static final Logger logger = LoggerFactory.getLogger(ConsolePrint.class);
 
     public static void print(String key, String value){
-        logger.info("{} ：", key);
-        logger.info("{}", value);
+        logger.info("{}: {}", key, value);
+    }
+
+    public static void print(JSONObject jsonObject){
+        logger.info(jsonObject.toJSONString() + '\n');
     }
 
     public static void print(String string){

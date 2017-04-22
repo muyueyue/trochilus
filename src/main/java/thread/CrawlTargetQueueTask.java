@@ -9,9 +9,7 @@ import persistence.ConsolePrint;
 import persistence.FilePersistence;
 import persistence.MongoDBJDBC;
 import utils.*;
-
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by jiahao on 17-4-3.
@@ -56,14 +54,10 @@ public class CrawlTargetQueueTask implements Runnable{
                     }
                 }
                 if(persistence.contains("console")){
-                    for(Map.Entry<String, Object> entry : result.entrySet()){
-                        ConsolePrint.print(entry.getKey(), (String)entry.getValue());
-                    }
+                    ConsolePrint.print(result);
                 }
                 if(persistence.contains("file")){
-                    for(Map.Entry<String, Object> entry : result.entrySet()){
-                        FilePersistence.write(entry.getKey(), (String)entry.getValue());
-                    }
+                    FilePersistence.write(result);
                 }
                 if(persistence.contains("db")){
                     MongoDBJDBC.insert(result);

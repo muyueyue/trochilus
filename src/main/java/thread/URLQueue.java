@@ -103,7 +103,8 @@ public class URLQueue {
             return;
         }
         for(String string : url){
-            if(StringUtil.isNotURL(string) || isInTargetQueue(string) || isInStartQueue(string) || isInFinishQueue(string)){
+            //logger.info("真实的URL为：{}", url);
+            if(StringUtil.isNotURL(string) || isExist(string)){
                 continue;
             }
             targetQueue.offer(string);
@@ -116,7 +117,7 @@ public class URLQueue {
             return;
         }
         for(String string : url){
-            if(StringUtil.isNotURL(string) || isInTargetQueue(string) || isInStartQueue(string) || isInFinishQueue(string)){
+            if(StringUtil.isNotURL(string) || isExist(string)){
                 continue;
             }
             startQueue.offer(string);
@@ -128,7 +129,7 @@ public class URLQueue {
         if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
             return;
         }
-        if(isInTargetQueue(url) || isInStartQueue(url) || isInFinishQueue(url)){
+        if(isExist(url)){
             return;
         }
         targetQueue.offer(url);
@@ -139,7 +140,7 @@ public class URLQueue {
         if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
             return;
         }
-        if(isInTargetQueue(url) || isInStartQueue(url) || isInFinishQueue(url)){
+        if(isExist(url)){
             return;
         }
         startQueue.offer(url);
@@ -152,6 +153,13 @@ public class URLQueue {
         }
         finishQueue.offer(url);
         logger.info("向已完成队列中添加URL: {}", url);
+    }
+
+    public Boolean isExist(String url){
+        if(isInTargetQueue(url) || isInStartQueue(url) || isInFinishQueue(url)){
+            return true;
+        }
+        return false;
     }
 
     public BlockingQueue<String> getTargetQueue(){

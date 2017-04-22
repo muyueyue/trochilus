@@ -35,10 +35,12 @@ public class Spider {
 
     private List<JSONObject> keyRegexMethod;
 
-    public void Spider(){
+    public Spider(){
+        this.startUrl = new ArrayList<>();
         this.result = new Result();
         this.persistence = new ArrayList<>();
         this.keyRegexMethod = new ArrayList<>();
+        this.threadNum = 1;
         this.persistence.add("console");
     }
 
@@ -103,7 +105,15 @@ public class Spider {
     public Spider addToTargetQueue(String regex){
         URLQueue urlQueue = URLQueue.getInstance();
         urlQueue.addToStartQueue(this.startUrl);
-        CrawlStartURLQueueTask crawlStartURLQueueTask = new CrawlStartURLQueueTask(regex);
+        CrawlStartURLQueueTask crawlStartURLQueueTask = new CrawlStartURLQueueTask(regex, "");
+        ThreadPool.getInstance().execute(crawlStartURLQueueTask);
+        return this;
+    }
+
+    public Spider addToTargetQueue(String regex, String prefix){
+        URLQueue urlQueue = URLQueue.getInstance();
+        urlQueue.addToStartQueue(this.startUrl);
+        CrawlStartURLQueueTask crawlStartURLQueueTask = new CrawlStartURLQueueTask(regex, prefix);
         ThreadPool.getInstance().execute(crawlStartURLQueueTask);
         return this;
     }

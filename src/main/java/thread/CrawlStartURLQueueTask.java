@@ -9,6 +9,9 @@ import utils.Config;
 import utils.Method;
 import utils.Request;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by jiahao on 17-4-3.
  *
@@ -20,8 +23,11 @@ public class CrawlStartURLQueueTask implements Runnable{
 
     private String xPath;
 
-    public CrawlStartURLQueueTask(String xPath){
+    private String prefix;
+
+    public CrawlStartURLQueueTask(String xPath, String prefix){
         this.xPath = xPath;
+        this.prefix = prefix;
     }
 
     @Override
@@ -35,6 +41,14 @@ public class CrawlStartURLQueueTask implements Runnable{
                 }
                 Request  request = new Request(startUrl, Method.GET);
                 Html html = Downloader.getHtml(request);
+                if(!this.prefix.equals("")){
+                    List<String> temp = html.xPath(this.xPath);
+                    List<String> targetUrls = new ArrayList<>();
+                    for(String url : temp){
+                        targetUrls.add(this.prefix.concat(url));
+                    }
+                    urlQueue.addURLToTargetQueue(targetUrls);
+                }
                 urlQueue.addURLToTargetQueue(html.xPath(this.xPath));
                 urlQueue.addURLToFinishQueue(startUrl);
             }

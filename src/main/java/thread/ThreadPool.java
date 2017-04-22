@@ -23,7 +23,7 @@ public class ThreadPool {
         executorService = Executors.newCachedThreadPool();
     }
 
-    public static ThreadPool getInstance(){
+    public static synchronized ThreadPool getInstance(){
         if(threadPool == null){
             threadPool = new ThreadPool();
         }
@@ -31,7 +31,7 @@ public class ThreadPool {
     }
 
     public void execute(Runnable task){
-        threadPool.execute(task);
+        executorService.execute(task);
     }
 
     public void shutdown(){

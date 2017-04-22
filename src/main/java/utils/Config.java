@@ -28,5 +28,5 @@ public class Config {
 
     public static String filePath = "";
 
-    public static long errorSleepTime = 10000;
+    public static long errorSleepTime = 1000;
 }
