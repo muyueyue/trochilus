@@ -1,5 +1,7 @@
 # trochilus
 
+[阅读中文](https://github.com/muyueyue/trochilus/blob/master/README-zh.md)
+
 > A lightweight crawler kernel based on Java.
 This framework provides some sort of crawler operations that allow users to complete their business with simple code
 
