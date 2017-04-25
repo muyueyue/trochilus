@@ -1,5 +1,6 @@
 package persistence;
 
+import com.alibaba.fastjson.JSONObject;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ public class DataPersistence {
 
     private static final Logger logger = LoggerFactory.getLogger(DataPersistence.class);
 
-    public static void insert(String key, String value){
-        MongoDBJDBC.insert(key, value);
+    public static void insert(JSONObject jsonObject){
+        MongoDBJDBC.insert(jsonObject);
     }
 }

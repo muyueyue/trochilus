@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import parse.Html;
 import persistence.ConsolePrint;
+import persistence.DataPersistence;
 import persistence.FilePersistence;
 import persistence.MongoDBJDBC;
 import utils.*;
@@ -60,7 +61,7 @@ public class CrawlTargetQueueTask implements Runnable{
                     FilePersistence.write(result);
                 }
                 if(persistence.contains("db")){
-                    MongoDBJDBC.insert(result);
+                    DataPersistence.insert(result);
                 }
             }
         }catch (Exception e){

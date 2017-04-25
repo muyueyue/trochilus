@@ -30,13 +30,13 @@ public class MongoDBJDBC {
 
     private static synchronized void setMongoClient(){
         try{
-            mongoClient = new MongoClient(Config.mongoDBHost, Config.mongoDBPort );
+            mongoClient = new MongoClient(Config.mongoDBHost, Config.mongoDBPort);
         }catch (Exception e){
             logger.error("数据库连接出错");
         }
     }
 
-    public static  MongoDatabase getMongoDatabase(){
+    public static MongoDatabase getMongoDatabase(){
         if (mongoClient == null){
             setMongoClient();
         }
@@ -76,6 +76,10 @@ public class MongoDBJDBC {
     }
 
     public static void insert(JSONObject jsonObject){
+        getMongoDatabase();
+        if(mongoDatabase == null){
+            return;
+        }
         Document document = new Document();
         for(Map.Entry<String, Object> entry : jsonObject.entrySet()){
             document.append(entry.getKey(), (String)entry.getValue());
