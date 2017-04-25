@@ -29,4 +29,6 @@ public class Config {
     public static String filePath = "";
 
     public static long errorSleepTime = 1000;
+
+    public static String proxyUrl = "http://www.xicidaili.com/nn/{}";
 }

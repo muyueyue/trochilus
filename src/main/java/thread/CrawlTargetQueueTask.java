@@ -8,7 +8,6 @@ import parse.Html;
 import persistence.ConsolePrint;
 import persistence.DataPersistence;
 import persistence.FilePersistence;
-import persistence.MongoDBJDBC;
 import utils.*;
 import java.util.List;
 
@@ -46,10 +45,22 @@ public class CrawlTargetQueueTask implements Runnable{
                 for(JSONObject jsonObject : keyRegexMethod){
                     if(jsonObject.getString("method") == ParseMethod.REGEX.toString()){
                         List<String> list = html.regex(jsonObject.getString("regex"));
-                        result.put(jsonObject.getString("key"), StringUtil.listToString(list));
+                        if(jsonObject.getBoolean("isPartition")){
+                            for(int i = 0; i < list.size(); i++){
+                                result.put(jsonObject.getString("key").concat(String.valueOf(i)), list.get(i));
+                            }
+                        }else {
+                            result.put(jsonObject.getString("key"), StringUtil.listToString(list));
+                        }
                     }else if(jsonObject.getString("method") == ParseMethod.XPATH.toString()){
                         List<String> list = html.xPath(jsonObject.getString("regex"));
-                        result.put(jsonObject.getString("key"), StringUtil.listToString(list));
+                        if(jsonObject.getBoolean("isPartition")){
+                            for(int i = 0; i < list.size(); i++){
+                                result.put(jsonObject.getString("key").concat(String.valueOf(i)), list.get(i));
+                            }
+                        }else {
+                            result.put(jsonObject.getString("key"), StringUtil.listToString(list));
+                        }
                     }else {
                         continue;
                     }

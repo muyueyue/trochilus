@@ -27,7 +27,7 @@ public class Downloader {
             if(request == null){
                 return null;
             }
-            logger.info("正在爬取 {} 页面", request.getUrl());
+            logger.info("正在爬取页面: {}", request.getUrl());
             HttpResponse httpResponse = request.send();
             if(httpResponse == null || httpResponse.getEntity() == null){
                 return null;

@@ -12,8 +12,10 @@ import thread.URLQueue;
 import utils.Config;
 import utils.ParseMethod;
 
+import javax.management.StringValueExp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * 爬虫的入口
@@ -49,6 +51,18 @@ public class Spider {
         return this;
     }
 
+    public Spider addStartUrl(String startUrl, int limit){
+        if(startUrl.indexOf("{}") == -1){
+            logger.error("参数格式异常");
+            return null;
+        }
+        for(int i = 1; i <= limit; i++){
+            String url = startUrl.replace("{}", String.valueOf(i));
+            this.startUrl.add(url);
+        }
+        return this;
+    }
+
     public Spider addStartUrl(List<String> startUrls){
         if(startUrls ==  null){
             logger.error("起始URL列表为空");
@@ -58,6 +72,19 @@ public class Spider {
             this.startUrl.add(url);
         }
         return this;
+    }
+
+    public Spider addUrlToTargeQueue(String url, int limit){
+            if(url.indexOf("{}") == -1){
+                logger.error("URL格式出错,缺少{}");
+                return null;
+            }
+            URLQueue urlQueue = URLQueue.getInstance();
+            for(int i = 0; i <= limit; i++){
+                String temp = url.replace("{}", String.valueOf(i));
+                urlQueue.addURLToTargetQueue(temp);
+            }
+            return this;
     }
 
     public Spider thread(int threadNum){
@@ -121,6 +148,16 @@ public class Spider {
     public Spider putField(String key, String regex, ParseMethod method){
         JSONObject jsonObject = new JSONObject();
         jsonObject.fluentPut("key", key).fluentPut("regex", regex).fluentPut("method", method.toString());
+        this.keyRegexMethod.add(jsonObject);
+        return this;
+    }
+
+    public Spider putField(String key, String regex, ParseMethod method, boolean isPartition){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.fluentPut("key", key)
+                .fluentPut("regex", regex)
+                .fluentPut("method", method.toString())
+                .fluentPut("isPartition", isPartition);
         this.keyRegexMethod.add(jsonObject);
         return this;
     }
