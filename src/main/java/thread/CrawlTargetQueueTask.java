@@ -45,7 +45,7 @@ public class CrawlTargetQueueTask implements Runnable{
                 for(JSONObject jsonObject : keyRegexMethod){
                     if(jsonObject.getString("method") == ParseMethod.REGEX.toString()){
                         List<String> list = html.regex(jsonObject.getString("regex"));
-                        if(jsonObject.getBoolean("isPartition")){
+                        if(jsonObject.containsKey("isPartition") && jsonObject.getBoolean("isPartition")){
                             for(int i = 0; i < list.size(); i++){
                                 result.put(jsonObject.getString("key").concat(String.valueOf(i)), list.get(i));
                             }
@@ -54,7 +54,7 @@ public class CrawlTargetQueueTask implements Runnable{
                         }
                     }else if(jsonObject.getString("method") == ParseMethod.XPATH.toString()){
                         List<String> list = html.xPath(jsonObject.getString("regex"));
-                        if(jsonObject.getBoolean("isPartition")){
+                        if(jsonObject.containsKey("isPartition") && jsonObject.getBoolean("isPartition")){
                             for(int i = 0; i < list.size(); i++){
                                 result.put(jsonObject.getString("key").concat(String.valueOf(i)), list.get(i));
                             }

@@ -15,8 +15,7 @@ public class GetProxy {
         proxySpider.addUrlToTargeQueue(Config.proxyUrl, 100)
                 .putField("IP", "//table[@id='ip_list']/tbody/tr/td[2]/text()", ParseMethod.XPATH, true)
                 .putField("port", "//table[@id='ip_list']/tbody/tr/td[3]/text()", ParseMethod.XPATH, true)
-                .putField("site", "//table[@id='ip_list']/tbody/tr/td[4]/a/text()", ParseMethod.XPATH, true)
-                .thread(10)
+                .thread(1)
                 .run();
     }
 }

@@ -26,8 +26,8 @@ public class SpiderTest {
                 .addToTargetQueue("//div[@class='summary']/h2[@class='title']/a/@href", "https://segmentfault.com")
                 .putField("title", "//h1[@id='questionTitle']/a/text()", ParseMethod.XPATH)
                 .putField("detail", "//div[@class='question fmt']/p/text()", ParseMethod.XPATH)
-                .putField("answers", "//div[@class='answer fmt]/p/text()", ParseMethod.XPATH)
-                .thread(1)
+                .putField("answers", "//div[@class='answer fmt]/p/text()", ParseMethod.XPATH, true)
+                .thread(10)
                 .run();
     }
 }

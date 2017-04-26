@@ -1,12 +1,14 @@
 package utils;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
@@ -190,9 +192,11 @@ public class Request {
      */
     public HttpResponse send(){
         HttpClient httpClient = new DefaultHttpClient();
+        HttpHost proxy = new HttpHost("183.95.80.165", 8080);
         httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.BROWSER_COMPATIBILITY);
         httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, connectionTimeout);
         httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, socketTimeout);
+        //httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
         HttpResponse httpResponse;
         try{
             if(this.method == Method.POST){
