@@ -1,6 +1,6 @@
 # Trochilus
 
-[Readme in Chinese](https://github.com/muyueyue/trochilus/blob/master/README.md)
+[Readme in English](https://github.com/muyueyue/trochilus/blob/master/README.md)
 
 ## 简介
 
