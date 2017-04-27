@@ -12,6 +12,8 @@ import java.util.List;
 /**
  * Created by jiahao on 17-4-1.
  *
+ * Write the results to the database
+ *
  * @author jiahao.pjh@gmail.com
  */
 public class DataPersistence {

@@ -11,6 +11,9 @@ import java.io.PrintStream;
 /**
  * Created by jiahao on 17-4-21.
  *
+ * Provides a set of methods for writing results to
+ * local file system
+ *
  * @author jiahao.pjh@gmail.com
  */
 public class FilePersistence {

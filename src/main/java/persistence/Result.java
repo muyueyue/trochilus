@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by jiahao on 17-4-1.
  *
+ * The data structure that stores the crawler crawl results
+ *
  * @author jiahao.pjh@gmail.com
  */
 public class Result {

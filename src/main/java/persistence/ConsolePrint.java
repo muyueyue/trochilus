@@ -13,8 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 将爬取的内容向控制台打印
  * Created by jiahao on 17-4-1.
+ *
+ *  Print the contents of the crawl to the console
  *
  * @author jiahao.pjh@gmail.com
  */
