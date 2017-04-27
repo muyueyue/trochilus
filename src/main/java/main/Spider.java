@@ -80,7 +80,7 @@ public class Spider {
                 return null;
             }
             URLQueue urlQueue = URLQueue.getInstance();
-            for(int i = 0; i <= limit; i++){
+            for(int i = 1; i <= limit; i++){
                 String temp = url.replace("{}", String.valueOf(i));
                 urlQueue.addURLToTargetQueue(temp);
             }

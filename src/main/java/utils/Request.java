@@ -62,6 +62,11 @@ public class Request {
      */
     private Integer socketTimeout = Config.socketTimeout;
 
+    /**
+     * 设置代理
+     */
+    private JSONObject proxy;
+
     public Request(){}
 
     public static Logger getLogger() {
@@ -124,12 +129,19 @@ public class Request {
         return this;
     }
 
-    public void setConnectionTimeout(Integer connectionTimeout) {
-        this.connectionTimeout = connectionTimeout;
+    public Request setProxy(JSONObject proxy){
+        this.proxy = proxy;
+        return this;
     }
 
-    public void setSocketTimeout(Integer socketTimeout) {
+    public Request setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+        return this;
+    }
+
+    public Request setSocketTimeout(Integer socketTimeout) {
         this.socketTimeout = socketTimeout;
+        return this;
     }
 
     /**
@@ -192,11 +204,13 @@ public class Request {
      */
     public HttpResponse send(){
         HttpClient httpClient = new DefaultHttpClient();
-        HttpHost proxy = new HttpHost("183.95.80.165", 8080);
+        if(this.proxy != null){
+            HttpHost proxy = new HttpHost(this.proxy.getString("IP"), this.proxy.getIntValue("port"));
+            httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+        }
         httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.BROWSER_COMPATIBILITY);
         httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, connectionTimeout);
         httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, socketTimeout);
-        //httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
         HttpResponse httpResponse;
         try{
             if(this.method == Method.POST){
