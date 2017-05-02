@@ -16,7 +16,7 @@ public class GetProxy {
                 .putField("IP", "//table[@id='ip_list']/tbody/tr/td[2]/text()", ParseMethod.XPATH, true)
                 .putField("port", "//table[@id='ip_list']/tbody/tr/td[3]/text()", ParseMethod.XPATH, true)
                 .thread(1)
-                .file("/home/jiahao/data/proxy")
+                .file("")
                 .run();
     }
 }

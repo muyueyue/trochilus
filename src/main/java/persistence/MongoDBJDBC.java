@@ -12,12 +12,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-
 /**
- *Created by pjh on 2017/2/10.
+ * Created by pjh on 2017/2/10.
  *
- *Get MongoDB connections and related actions
+ * Get MongoDB connections and related actions
  *
  * @author jiahao.pjh@gmail.com
  */
