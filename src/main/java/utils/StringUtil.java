@@ -2,7 +2,10 @@ package utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import redis.RedisConnection;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.io.*;
 import java.util.List;
 
@@ -151,5 +154,28 @@ public class StringUtil {
             stringBuilder.append(string + '\n');
         }
         return stringBuilder.toString();
+    }
+
+    public static Boolean urlIsRepetition(String url){
+        Long i = RedisConnection.getJedisCon().sadd(Config.urlHash, getMD5(url));
+        if(i == 1){
+            return false;
+        }
+        return true;
+    }
+
+    public static String getMD5(String string){
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(string.getBytes());
+            return new BigInteger(1, md.digest()).toString(16);
+        }catch (Exception e){
+            logger.error("字符串　{}　的MD5加密出错", string);
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getMD5("hello"));
     }
 }

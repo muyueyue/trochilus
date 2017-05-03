@@ -31,4 +31,16 @@ public class Config {
     public static long errorSleepTime = 1000;
 
     public static String proxyUrl = "http://www.xicidaili.com/nn/{}";
+
+    public static String redisIP = "localhost";
+
+    public static int redisPort = 6379;
+
+    public static String redisTargetUrls = "targetUrls";
+
+    public static String redisFinishUrls = "finishUrls";
+
+    public static String redisStartUrls = "startUrls";
+
+    public static String urlHash = "urlHash";
 }

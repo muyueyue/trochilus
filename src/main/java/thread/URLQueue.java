@@ -25,7 +25,11 @@ public class URLQueue {
 
     private BlockingQueue<String> targetQueue;
 
+    private BlockingQueue<String> cacheTargetQueue;
+
     private BlockingQueue<String> startQueue;
+
+    private BlockingQueue<String> cacheStartQueue;
 
     private BlockingQueue<String> finishQueue;
 
@@ -33,6 +37,8 @@ public class URLQueue {
         targetQueue = new LinkedBlockingDeque();
         startQueue = new LinkedBlockingDeque<>();
         finishQueue = new LinkedBlockingDeque();
+        cacheStartQueue = new LinkedBlockingDeque<>();
+        cacheTargetQueue = new LinkedBlockingDeque<>();
     }
 
     public static synchronized URLQueue getInstance(){
@@ -56,38 +62,6 @@ public class URLQueue {
         logger.info("已爬取队列已清空");
     }
 
-    public Boolean isInTargetQueue(String url){
-        if(StringUtil.isEmpty(url)){
-            return null;
-        }
-
-        if(targetQueue.contains(url)){
-            return true;
-        }
-        return false;
-    }
-
-    public  Boolean isInStartQueue(String url){
-        if(StringUtil.isEmpty(url)){
-            return null;
-        }
-
-        if(startQueue.contains(url)){
-            return true;
-        }
-        return false;
-    }
-
-    public Boolean isInFinishQueue(String url){
-        if(StringUtil.isEmpty(url)){
-            return null;
-        }
-        if(finishQueue.contains(url)){
-            return true;
-        }
-        return false;
-    }
-
     public long getTargetQueueSize(){
         return targetQueue.size();
     }
@@ -98,17 +72,33 @@ public class URLQueue {
         return finishQueue.size();
     }
 
+    public void addURLToCacheTargetQueue(List<String> url){
+        if(url == null || url.size() == 0){
+            return;
+        }
+        for(String string : url){
+            cacheTargetQueue.offer(string);
+            logger.info("向待爬取缓存队列中添加URL: {}", string);
+        }
+    }
+
     public void addURLToTargetQueue(List<String> url){
         if(url == null || url.size() == 0){
             return;
         }
         for(String string : url){
-            //logger.info("真实的URL为：{}", url);
-            if(StringUtil.isNotURL(string) || isExist(string)){
-                continue;
-            }
             targetQueue.offer(string);
             logger.info("向待爬取队列中添加URL: {}", string);
+        }
+    }
+
+    public void addToCacheStartQueue(List<String> url){
+        if(url == null || url.size() == 0){
+            return;
+        }
+        for(String string : url){
+            cacheStartQueue.offer(string);
+            logger.info("向起始缓存队列中添加成功： {}", string);
         }
     }
 
@@ -117,9 +107,6 @@ public class URLQueue {
             return;
         }
         for(String string : url){
-            if(StringUtil.isNotURL(string) || isExist(string)){
-                continue;
-            }
             startQueue.offer(string);
             logger.info("向起始队列中添加成功： {}", string);
         }
@@ -129,18 +116,28 @@ public class URLQueue {
         if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
             return;
         }
-        if(isExist(url)){
-            return;
-        }
         targetQueue.offer(url);
         logger.info("向待爬取队列中添加URL: {}", url);
     }
 
-    public void addToStartQueue(String url){
+    public void addURLToCacheTargetQueue(String url){
         if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
             return;
         }
-        if(isExist(url)){
+        cacheTargetQueue.offer(url);
+        logger.info("向待爬取缓存队列中添加URL: {}", url);
+    }
+
+    public void addToCacheStartQueue(String url){
+        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
+            return;
+        }
+        cacheStartQueue.offer(url);
+        logger.info("向起始缓存队列中添加成功： {}", url);
+    }
+
+    public void addToStartQueue(String url){
+        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
             return;
         }
         startQueue.offer(url);
@@ -155,13 +152,6 @@ public class URLQueue {
         logger.info("向已完成队列中添加URL: {}", url);
     }
 
-    public Boolean isExist(String url){
-        if(isInTargetQueue(url) || isInStartQueue(url) || isInFinishQueue(url)){
-            return true;
-        }
-        return false;
-    }
-
     public BlockingQueue<String> getTargetQueue(){
         return targetQueue;
     }
@@ -173,4 +163,8 @@ public class URLQueue {
     public BlockingQueue<String> getFinishQueue(){
         return finishQueue;
     }
+
+    public BlockingQueue<String> getCacheTargetQueue(){return cacheTargetQueue;}
+
+    public BlockingQueue<String> getCacheStartQueue(){return cacheStartQueue;}
 }
