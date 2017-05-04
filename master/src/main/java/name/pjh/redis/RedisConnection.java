@@ -30,7 +30,7 @@ public class RedisConnection {
             config.setTestOnReturn(true);
             jedisPool = new JedisPool(config, Config.redisIP, Config.redisPort);
         }catch (Exception e){
-            logger.info("初始化Redis连接池出错: {}", e);
+            logger.error("初始化Redis连接池出错: {}", e);
         }
     }
 

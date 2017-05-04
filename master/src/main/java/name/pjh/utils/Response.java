@@ -34,14 +34,21 @@ public class Response {
         return this;
     }
 
+    public boolean isSuccess() {
+        return isSuccess;
+    }
+
+    public Object getContent() {
+        return content;
+    }
+
+    public String getErrorMeg() {
+        return errorMeg;
+    }
+
     public Response errorMeg(String errorMeg){
         this.errorMeg = errorMeg;
         return this;
-    }
-
-    @Override
-    public String toString(){
-        return "{\"isSuccess\":" + this.isSuccess + ", \"content\":" + this.content.toString() +", \"errorMeg\":" + this.errorMeg + "}";
     }
 
     public static void main(String[] args) {
