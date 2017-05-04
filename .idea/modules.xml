@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/crawler/crawler.iml" filepath="$PROJECT_DIR$/crawler/crawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/master/master.iml" filepath="$PROJECT_DIR$/master/master.iml" />
       <module fileurl="file://$PROJECT_DIR$/trochilus.iml" filepath="$PROJECT_DIR$/trochilus.iml" />
     </modules>
   </component>
