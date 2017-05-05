@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author jiahao.pjh@gmail.com
  */
+
 @RestController
 @RequestMapping("/master/url")
 public class RedisAPI {
@@ -69,12 +70,46 @@ public class RedisAPI {
     @RequestMapping("/addStartUrl")
     public Response addStartUrl(@RequestBody String body){
         logger.info("收到向Redis添加起始URL的命令 {}", body);
-        return null;
+        JSONObject param = JSONObject.parseObject(body);
+        if(param.containsKey("startUrls")){
+            JSONArray startUrls = param.getJSONArray("startUrls");
+            redisService.addStartUrl(startUrls);
+            return new Response().success();
+        }
+        if(param.containsKey("startUrl")){
+            redisService.addStartUrl(param);
+            return new Response().success();
+        }
+        return new Response().error().errorMeg("向Redis中添加起始URL出错");
     }
 
     @RequestMapping("/addTargetUrl")
-    public Response addTargetUrl(){
-        return null;
+    public Response addTargetUrl(@RequestBody String body){
+        logger.info("收到向Redis中添加待爬取URL的命令{}", body);
+        JSONObject param = JSONObject.parseObject(body);
+        if(param.containsKey("targetUrls")){
+            redisService.addTargetUrl(param.getJSONArray("targetUrls"));
+            return new Response().success();
+        }
+        if(param.containsKey("targetUrl")){
+            redisService.addTargetUrl(param);
+            return new Response().success();
+        }
+        return new Response().error().errorMeg("向Redis中添加待爬取URL失败");
     }
 
+    @RequestMapping("/addFinishUrl")
+    public Response addFinishUrl(@RequestBody String body){
+        logger.info("收到向Redis中添加完成的URL的命令 {}", body);
+        JSONObject param = JSONObject.parseObject(body);
+        if(param.containsKey("finishUrls")){
+            redisService.addFinishUrl(param.getJSONArray("finishUrls"));
+            return new Response().success();
+        }
+        if(param.containsKey("finishUrl")){
+            redisService.addFinishUrl(param);
+            return new Response().success();
+        }
+        return new Response().error().errorMeg("向Redis中添加完成的URL成功");
+    }
 }

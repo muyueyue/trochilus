@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages={"name.pjh.api", "name.pjh.service"})
+@SpringBootApplication(scanBasePackages={"name.pjh.api", "name.pjh.service", "name.pjh.filter"})
 public class MasterApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(MasterApplication.class);

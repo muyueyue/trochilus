@@ -1,8 +1,8 @@
 package name.pjh.utils;
 
+import name.pjh.redis.RedisConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -155,13 +155,13 @@ public class StringUtil {
         return stringBuilder.toString();
     }
 
-   /* public static Boolean urlIsRepetition(String url){
+    public static Boolean urlIsRepetition(String url){
         Long i = RedisConnection.getJedisCon().sadd(Config.urlHash, getMD5(url));
         if(i == 1){
             return false;
         }
         return true;
-    }*/
+    }
 
     public static String getMD5(String string){
         try{

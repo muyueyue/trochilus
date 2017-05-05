@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import name.pjh.redis.RedisClient;
 import name.pjh.spider.SpiderInfo;
 import name.pjh.spider.SpiderPool;
+import name.pjh.utils.StringUtil;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class RedisService {
     public JSONObject getStartUrl(String spiderId){
         String url = RedisClient.getStartUrl();
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
+        spiderInfo.setLastTime(System.currentTimeMillis());
         String pre = String.valueOf(System.currentTimeMillis());
         spiderInfo.getBackupStartUrl().offer(pre.concat(url));
         JSONObject data = new JSONObject();
@@ -33,6 +35,7 @@ public class RedisService {
             return null;
         }
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
+        spiderInfo.setLastTime(System.currentTimeMillis());
         String pre = String.valueOf(System.currentTimeMillis());
         JSONArray data = new JSONArray();
         for(String url : urls){
@@ -47,6 +50,7 @@ public class RedisService {
     public JSONObject getTargetUrl(String spiderId){
         String url = RedisClient.getTargetUrl();
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
+        spiderInfo.setLastTime(System.currentTimeMillis());
         String pre = String.valueOf(System.currentTimeMillis());
         spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
         JSONObject data = new JSONObject();
@@ -60,6 +64,7 @@ public class RedisService {
             return null;
         }
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
+        spiderInfo.setLastTime(System.currentTimeMillis());
         String pre = String.valueOf(System.currentTimeMillis());
         JSONArray data = new JSONArray();
         for(String url : urls){
@@ -75,7 +80,11 @@ public class RedisService {
         if(jsonObject == null){
             return;
         }
-        RedisClient.addToStartUrls(jsonObject.getString("startUrl"));
+        String url = jsonObject.getString("startUrl");
+        if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+            return;
+        }
+        RedisClient.addToStartUrls(url);
     }
 
     public void addStartUrl(JSONArray jsonArray){
@@ -83,7 +92,11 @@ public class RedisService {
             return;
         }
         for(int i = 0; i < jsonArray.size(); i++){
-            RedisClient.addToStartUrls(jsonArray.getJSONObject(i).getString("startUrl"));
+            String url = jsonArray.getJSONObject(i).getString("startUrl");
+            if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+                continue;
+            }
+            RedisClient.addToStartUrls(url);
         }
     }
 
@@ -91,7 +104,11 @@ public class RedisService {
         if(jsonObject == null){
             return;
         }
-        RedisClient.addToTargetUrls(jsonObject.getString("targetUrl"));
+        String url = jsonObject.getString("targetUrl");
+        if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+            return;
+        }
+        RedisClient.addToTargetUrls(url);
     }
 
     public void addTargetUrl(JSONArray jsonArray){
@@ -99,7 +116,35 @@ public class RedisService {
             return;
         }
         for(int i = 0; i < jsonArray.size(); i++){
-            RedisClient.addToTargetUrls(jsonArray.getJSONObject(i).getString("targetUrl"));
+            String url = jsonArray.getJSONObject(i).getString("targetUrl");
+            if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+                continue;
+            }
+            RedisClient.addToTargetUrls(url);
+        }
+    }
+
+    public void addFinishUrl(JSONObject jsonObject){
+        if(jsonObject == null){
+            return;
+        }
+        String url = jsonObject.getString("finishUrl");
+        if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+            return;
+        }
+        RedisClient.addToFinishUrls(url);
+    }
+
+    public void addFinishUrl(JSONArray jsonArray){
+        if(jsonArray == null){
+            return;
+        }
+        for(int i = 0; i < jsonArray.size(); i++){
+            String url = jsonArray.getJSONObject(i).getString("finishUrl");
+            if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+                continue;
+            }
+            RedisClient.addToFinishUrls(url);
         }
     }
 }

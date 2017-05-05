@@ -35,7 +35,7 @@ public class SpiderPool {
         return spiderInfoList;
     }
 
-    public synchronized Boolean add(SpiderInfo spiderInfo){
+    public synchronized boolean add(SpiderInfo spiderInfo){
         if (getSpider(spiderInfo.getSpiderId()) != null){
             logger.error("爬虫　{}　已存在", spiderInfo.getSpiderId());
             return false;

@@ -22,6 +22,8 @@ public class SpiderInfo {
 
     private BlockingQueue<String> backupTargetUrl;
 
+    private long lastTime;
+
     public SpiderInfo(String spiderId){
         this.spiderId = spiderId;
         this.backupStartUrl = new LinkedBlockingDeque<>();
@@ -38,5 +40,14 @@ public class SpiderInfo {
 
     public String getSpiderId() {
         return spiderId;
+    }
+
+    public long getLastTime() {
+        return lastTime;
+    }
+
+    public void setLastTime(long lastTime) {
+
+        this.lastTime = lastTime;
     }
 }

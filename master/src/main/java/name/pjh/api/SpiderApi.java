@@ -2,6 +2,7 @@ package name.pjh.api;
 
 import com.alibaba.fastjson.JSONObject;
 import name.pjh.service.RedisService;
+import name.pjh.service.SpiderService;
 import name.pjh.spider.SpiderInfo;
 import name.pjh.spider.SpiderPool;
 import name.pjh.utils.Response;
@@ -25,6 +26,9 @@ public class SpiderApi {
 
     private static final Logger logger = LoggerFactory.getLogger(SpiderApi.class);
 
+    @Autowired
+    private SpiderService spiderService;
+
     @PostMapping("/register")
     public Response register(@RequestBody String body){
         logger.info("收到注册爬虫的命令 {}", body);
@@ -33,11 +37,9 @@ public class SpiderApi {
         if(StringUtil.isEmpty(spiderId)){
             return new Response().error().errorMeg("爬虫缺少唯一标识，注册失败");
         }
-        SpiderInfo spider = new SpiderInfo(spiderId);
-        SpiderPool pool = SpiderPool.getInstance();
-        if(pool.add(spider)){
+       if(spiderService.createSpider(spiderId)){
             return new Response().success();
-        }
+       }
         return new Response().error().errorMeg("爬虫已存在，注册失败");
     }
 }
