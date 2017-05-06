@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24395118-5aed-472c-b48f-ec5e80a9f879" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/crawler/src/main/java/utils/Response.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/crawler/src/main/java/redis/AddToTagetUrlsTask.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/redis/AddToTargetUrlsTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/download/Downloader.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/download/Downloader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/redis/AddToFinishUrlsTask.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/redis/AddToFinishUrlsTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/redis/AddToStartUrlsTask.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/redis/AddToStartUrlsTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/redis/GetStartUrlsTask.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/redis/GetStartUrlsTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/redis/GetTargetUrlsTask.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/redis/GetTargetUrlsTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/utils/Config.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/utils/Config.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/utils/Request.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/utils/Request.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/api/RedisAPI.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/api/RedisAPI.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/crawler/target/" />
@@ -112,8 +102,8 @@
       <file leaf-file-name="AddToFinishUrlsTask.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/crawler/src/main/java/redis/AddToFinishUrlsTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="31" column="58" lean-forward="false" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
+            <state relative-caret-position="215">
+              <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -1378,12 +1368,12 @@
       <workItem from="1493819708411" duration="5645000" />
       <workItem from="1493877348815" duration="781000" />
       <workItem from="1493879094775" duration="26404000" />
-      <workItem from="1493953584863" duration="32942000" />
+      <workItem from="1493953584863" duration="33328000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="225307000" />
+    <option name="totallyTimeSpent" value="225693000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1396,7 +1386,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="26" width="1920" height="998" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1419,7 +1409,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2675894" sideWeight="0.49806523" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26528257" sideWeight="0.49806523" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2230523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2230523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756633" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1811,8 +1801,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/crawler/src/main/java/redis/AddToFinishUrlsTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="31" column="58" lean-forward="false" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
+        <state relative-caret-position="215">
+          <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
           <folding />
         </state>
       </provider>
