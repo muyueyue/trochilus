@@ -3,12 +3,12 @@ package download;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import parse.Html;
 import utils.Request;
+import utils.Response;
 import utils.Util;
 
 import java.io.IOException;
@@ -28,25 +28,16 @@ public class Downloader {
                 return null;
             }
             logger.info("正在爬取页面: {}", request.getUrl());
-            HttpResponse httpResponse = request.send();
-            if(httpResponse == null || httpResponse.getEntity() == null){
+            Response response = request.send();
+            if(response == null){
                 return null;
             }
-            HttpEntity entity = httpResponse.getEntity();
-            byte[] bytes = EntityUtils.toByteArray(entity);
-            if(bytes.length == 0){
-                return null;
-            }
-            String charSet = Util.getEncoding(bytes);
-            if(charSet == null){
-                charSet = "UTF-8";
-            }
-            String html = new String(bytes, charSet);
+            String html = response.getContent();
             if(html == null){
                 return null;
             }
             return new Html(html);
-        }catch (IOException e){
+        }catch (Exception e){
             logger.error("获取网页源代码出错：{}", e.toString());
             return null;
         }

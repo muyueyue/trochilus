@@ -43,4 +43,8 @@ public class Config {
     public static String redisStartUrls = "startUrls";
 
     public static String urlHash = "urlHash";
+
+    public static String masterAddr;
+
+    public static String spiderId;
 }

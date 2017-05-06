@@ -7,10 +7,7 @@ import name.pjh.utils.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by jiahao on 17-5-4.
@@ -27,7 +24,7 @@ public class RedisAPI {
     @Autowired
     private RedisService redisService;
 
-    @RequestMapping("/getStartUrl")
+    @GetMapping("/getStartUrl")
     public Response getStartUrl(@RequestParam("spiderId") String spiderId,
                                 @RequestParam(value = "start", defaultValue = "0") int start,
                                 @RequestParam(value = "end", defaultValue = "0") int end){
@@ -47,7 +44,7 @@ public class RedisAPI {
         }
     }
 
-    @RequestMapping("/getTargetUrl")
+    @GetMapping("/getTargetUrl")
     public Response getTargetUrl(@RequestParam("spiderId") String spiderId,
                                  @RequestParam(value = "start", defaultValue = "0") int start,
                                  @RequestParam(value = "end", defaultValue = "0") int end){
@@ -67,7 +64,7 @@ public class RedisAPI {
         }
     }
 
-    @RequestMapping("/addStartUrl")
+    @PostMapping("/addStartUrl")
     public Response addStartUrl(@RequestBody String body){
         logger.info("收到向Redis添加起始URL的命令 {}", body);
         JSONObject param = JSONObject.parseObject(body);
@@ -83,7 +80,7 @@ public class RedisAPI {
         return new Response().error().errorMeg("向Redis中添加起始URL出错");
     }
 
-    @RequestMapping("/addTargetUrl")
+    @PostMapping("/addTargetUrl")
     public Response addTargetUrl(@RequestBody String body){
         logger.info("收到向Redis中添加待爬取URL的命令{}", body);
         JSONObject param = JSONObject.parseObject(body);
@@ -98,7 +95,7 @@ public class RedisAPI {
         return new Response().error().errorMeg("向Redis中添加待爬取URL失败");
     }
 
-    @RequestMapping("/addFinishUrl")
+    @PostMapping("/addFinishUrl")
     public Response addFinishUrl(@RequestBody String body){
         logger.info("收到向Redis中添加完成的URL的命令 {}", body);
         JSONObject param = JSONObject.parseObject(body);

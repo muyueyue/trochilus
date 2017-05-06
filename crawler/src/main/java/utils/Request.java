@@ -95,7 +95,6 @@ public class Request {
 
     public Request(String url, Method method){
         this.url = url;
-
         this.method = method;
     }
 
@@ -202,7 +201,7 @@ public class Request {
      * 发送http请求
      * @return
      */
-    public HttpResponse send(){
+    public Response send(){
         HttpClient httpClient = new DefaultHttpClient();
         if(this.proxy != null){
             HttpHost proxy = new HttpHost(this.proxy.getString("IP"), this.proxy.getIntValue("port"));
@@ -233,6 +232,6 @@ public class Request {
                 logger.error("Http请求发送出错: {}", e.toString());
                 return null;
         }
-        return httpResponse;
+        return new Response(httpResponse);
     }
 }
