@@ -21,7 +21,6 @@ public class RedisService {
     public JSONObject getStartUrl(String spiderId){
         String url = RedisClient.getStartUrl();
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
-        spiderInfo.setLastTime(System.currentTimeMillis());
         String pre = String.valueOf(System.currentTimeMillis());
         spiderInfo.getBackupStartUrl().offer(pre.concat(url));
         JSONObject data = new JSONObject();
@@ -35,7 +34,6 @@ public class RedisService {
             return null;
         }
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
-        spiderInfo.setLastTime(System.currentTimeMillis());
         String pre = String.valueOf(System.currentTimeMillis());
         JSONArray data = new JSONArray();
         for(String url : urls){
@@ -50,7 +48,6 @@ public class RedisService {
     public JSONObject getTargetUrl(String spiderId){
         String url = RedisClient.getTargetUrl();
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
-        spiderInfo.setLastTime(System.currentTimeMillis());
         String pre = String.valueOf(System.currentTimeMillis());
         spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
         JSONObject data = new JSONObject();
@@ -64,7 +61,6 @@ public class RedisService {
             return null;
         }
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
-        spiderInfo.setLastTime(System.currentTimeMillis());
         String pre = String.valueOf(System.currentTimeMillis());
         JSONArray data = new JSONArray();
         for(String url : urls){
@@ -98,6 +94,13 @@ public class RedisService {
             }
             RedisClient.addToStartUrls(url);
         }
+    }
+    public void addStartUrl(String url){
+        RedisClient.addToStartUrls(url);
+    }
+
+    public void addTargetUrl(String url){
+        RedisClient.addToTargetUrls(url);
     }
 
     public void addTargetUrl(JSONObject jsonObject){

@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24395118-5aed-472c-b48f-ec5e80a9f879" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/filter/MyConfigurerAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/filter/RequestInterceptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/service/SpiderService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/task/Method/QueueHandle.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/task/SpiderCheckTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/utils/BloomFilter.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/utils/BloomFilter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler/src/main/java/utils/StringUtil.java" afterPath="$PROJECT_DIR$/crawler/src/main/java/utils/StringUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/MasterApplication.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/MasterApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/api/RedisAPI.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/api/RedisAPI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/api/SpiderApi.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/api/SpiderApi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/filter/RequestInterceptor.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/filter/RequestInterceptor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/service/RedisService.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/service/RedisService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderInfo.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderPool.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderPool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/master/src/main/java/name/pjh/utils/StringUtil.java" afterPath="$PROJECT_DIR$/master/src/main/java/name/pjh/utils/StringUtil.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/crawler/target/" />
@@ -55,18 +48,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpiderApi.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/api/SpiderApi.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="39" column="31" lean-forward="false" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MasterApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/MasterApplication.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -92,8 +73,24 @@
       <file leaf-file-name="RedisService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/service/RedisService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1441">
-              <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+            <state relative-caret-position="438">
+              <caret line="101" column="39" lean-forward="false" selection-start-line="101" selection-start-column="39" selection-end-line="101" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3346#3347#0" expanded="true" />
+                <element signature="e#3393#3394#0" expanded="true" />
+                <element signature="e#3436#3437#0" expanded="true" />
+                <element signature="e#3484#3485#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestInterceptor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/filter/RequestInterceptor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -101,11 +98,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RequestInterceptor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/filter/RequestInterceptor.java">
+      <file leaf-file-name="SpiderCheckTask.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/task/SpiderCheckTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="32" column="8" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+            <state relative-caret-position="708">
+              <caret line="40" column="83" lean-forward="false" selection-start-line="40" selection-start-column="83" selection-end-line="40" selection-end-column="83" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueueHandle.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/task/Method/QueueHandle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-342">
+              <caret line="21" column="65" lean-forward="false" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,23 +147,13 @@
       <file leaf-file-name="SpiderInfo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="518">
+              <caret line="62" column="5" lean-forward="false" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
               <folding>
-                <element signature="e#1048#1049#0" expanded="true" />
-                <element signature="e#1079#1080#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpiderPool.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderPool.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="38" column="57" lean-forward="true" selection-start-line="38" selection-start-column="57" selection-end-line="38" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1078#1079#0" expanded="true" />
+                <element signature="e#1109#1110#0" expanded="true" />
+                <element signature="e#1231#1232#0" expanded="true" />
+                <element signature="e#1262#1263#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -197,8 +196,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README-zh.md" />
-        <option value="$PROJECT_DIR$/src/main/java/main/Spider.java" />
         <option value="$PROJECT_DIR$/src/main/java/utils/Request.java" />
         <option value="$PROJECT_DIR$/src/main/java/persistence/FilePersistence.java" />
         <option value="$PROJECT_DIR$/src/main/java/persistence/ConsolePrint.java" />
@@ -238,16 +235,18 @@
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/utils/StringUtil.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/api/RedisAPI.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/service/SpiderService.java" />
-        <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderInfo.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/api/SpiderApi.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderPool.java" />
-        <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/service/RedisService.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/Filter/ConfigurerAdapter.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/Filter/MyConfigurerAdapter.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/Filter/RequestInterceptor.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/filter/MyConfigurerAdapter.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/MasterApplication.java" />
+        <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderInfo.java" />
         <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/filter/RequestInterceptor.java" />
+        <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/service/RedisService.java" />
+        <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/task/SpiderCheckTask.java" />
+        <option value="$PROJECT_DIR$/master/src/main/java/name/pjh/task/Method/QueueHandle.java" />
       </list>
     </option>
   </component>
@@ -475,6 +474,78 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trochilus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trochilus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pjh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="task" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trochilus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trochilus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pjh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="task" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Method" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1279,12 +1350,12 @@
       <workItem from="1493819708411" duration="5645000" />
       <workItem from="1493877348815" duration="781000" />
       <workItem from="1493879094775" duration="26404000" />
-      <workItem from="1493953584863" duration="14102000" />
+      <workItem from="1493953584863" duration="25359000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="206467000" />
+    <option name="totallyTimeSpent" value="217724000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1296,7 +1367,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="26" width="1920" height="998" extended-state="7" />
+    <frame x="0" y="26" width="1920" height="998" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1317,7 +1388,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37716264" sideWeight="0.49806523" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25259516" sideWeight="0.49806523" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26528257" sideWeight="0.49806523" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1905016" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1349,8 +1420,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/proxy.txt" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties" />
     <entry file="file://$PROJECT_DIR$/src/main/java/proxy/GetProxy.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/proxy/ProxyTask.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/proxy/ParseProxy.java" />
@@ -1572,37 +1641,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#1048#1049#0" expanded="true" />
-            <element signature="e#1079#1080#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/service/SpiderService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/service/RedisService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1441">
-          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/api/SpiderApi.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="447">
@@ -1649,10 +1687,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/spider/SpiderInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="62" column="5" lean-forward="false" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
+          <folding>
+            <element signature="e#1078#1079#0" expanded="true" />
+            <element signature="e#1109#1110#0" expanded="true" />
+            <element signature="e#1231#1232#0" expanded="true" />
+            <element signature="e#1262#1263#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/service/SpiderService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/filter/RequestInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="32" column="8" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+        <state relative-caret-position="0">
+          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/service/RedisService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="101" column="39" lean-forward="false" selection-start-line="101" selection-start-column="39" selection-end-line="101" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3346#3347#0" expanded="true" />
+            <element signature="e#3393#3394#0" expanded="true" />
+            <element signature="e#3436#3437#0" expanded="true" />
+            <element signature="e#3484#3485#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/task/SpiderCheckTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="708">
+          <caret line="40" column="83" lean-forward="false" selection-start-line="40" selection-start-column="83" selection-end-line="40" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/src/main/java/name/pjh/task/Method/QueueHandle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-342">
+          <caret line="21" column="65" lean-forward="false" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

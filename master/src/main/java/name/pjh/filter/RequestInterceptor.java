@@ -1,6 +1,7 @@
 package name.pjh.filter;
 
-import name.pjh.utils.StringUtil;
+import name.pjh.spider.SpiderInfo;
+import name.pjh.spider.SpiderPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -8,8 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.InputStream;
-import java.util.Map;
 
 /**
  * Created by jiahao on 17-5-6.
@@ -30,7 +29,18 @@ public class RequestInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        
+        String spiderId = httpServletRequest.getParameter("spiderId");
+        String clientIp = httpServletRequest.getRemoteAddr();
+        SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
+        if(spiderInfo == null){
+            String requestPath = httpServletRequest.getRequestURI();
+            if(requestPath.indexOf("register") == -1){
+                return false;
+            }
+            return true;
+        }
+        spiderInfo.setLastTime(System.currentTimeMillis());
+        spiderInfo.setClientIp(clientIp);
         return true;
     }
 

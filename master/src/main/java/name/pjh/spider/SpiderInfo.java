@@ -24,6 +24,8 @@ public class SpiderInfo {
 
     private long lastTime;
 
+    private String clientIp;
+
     public SpiderInfo(String spiderId){
         this.spiderId = spiderId;
         this.backupStartUrl = new LinkedBlockingDeque<>();
@@ -49,5 +51,14 @@ public class SpiderInfo {
     public void setLastTime(long lastTime) {
 
         this.lastTime = lastTime;
+    }
+
+    public String getClientIp() {
+        return clientIp;
+    }
+
+    public void setClientIp(String clientIp) {
+
+        this.clientIp = clientIp;
     }
 }
