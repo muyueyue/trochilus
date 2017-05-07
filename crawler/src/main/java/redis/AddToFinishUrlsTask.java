@@ -28,7 +28,6 @@ public class AddToFinishUrlsTask implements Runnable{
                 request.setParams("finishUrl", finishUrl);
                 request.send();
                 Thread.sleep(1000);
-                
             }catch (Exception e){
                 logger.error("向Redis中添加完成爬取的URL出错 {}", e);
             }
