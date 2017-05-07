@@ -11,7 +11,6 @@ public class MasterApplication {
 	private static final Logger logger = LoggerFactory.getLogger(MasterApplication.class);
 
 	public static void main(String[] args) {
-
 		logger.info("*********************正在启动Master服务*********************");
 		SpringApplication.run(MasterApplication.class, args);
 		logger.info("*********************Master服务启动成功*********************");
