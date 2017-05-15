@@ -28,6 +28,7 @@ public class SpiderTest {
                 .putField("detail", "//div[@class='question fmt']/p/text()", ParseMethod.XPATH)
                 .putField("answers", "//div[@class='answer fmt]/p/text()", ParseMethod.XPATH, true)
                 .thread(10)
+                .setMasterInfo("http://127.0.0.1:8080")
                 .run();
     }
 }

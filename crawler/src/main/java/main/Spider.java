@@ -8,6 +8,7 @@ import persistence.Result;
 import thread.*;
 import utils.Config;
 import utils.ParseMethod;
+import utils.Util;
 
 import javax.management.StringValueExp;
 import java.util.ArrayList;
@@ -34,7 +35,10 @@ public class Spider {
 
     private List<JSONObject> keyRegexMethod;
 
+    private SpiderService spiderService;
+
     public Spider(){
+        spiderService = new SpiderService();
         this.startUrl = new ArrayList<>();
         this.result = new Result();
         this.persistence = new ArrayList<>();
@@ -159,7 +163,16 @@ public class Spider {
         return this;
     }
 
+    public Spider setMasterInfo(String masterAddr){
+        Config.masterAddr = masterAddr;
+        return this;
+    }
+
     public void run(){
+        if(!spiderService.getSpiderId() && spiderService.register(Config.spiderId)){
+            logger.error("爬虫注册失败");
+            return;
+        }
         HttpTask.startHttpTask();
         for(int i = 0; i < this.threadNum; i++){
             CrawlTargetQueueTask crawlTargetQueueTask = new CrawlTargetQueueTask(this.keyRegexMethod, this.persistence);
