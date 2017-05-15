@@ -5,10 +5,7 @@ import exception.DBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import persistence.Result;
-import thread.CrawlStartURLQueueTask;
-import thread.CrawlTargetQueueTask;
-import thread.ThreadPool;
-import thread.URLQueue;
+import thread.*;
 import utils.Config;
 import utils.ParseMethod;
 
@@ -163,6 +160,7 @@ public class Spider {
     }
 
     public void run(){
+        HttpTask.startHttpTask();
         for(int i = 0; i < this.threadNum; i++){
             CrawlTargetQueueTask crawlTargetQueueTask = new CrawlTargetQueueTask(this.keyRegexMethod, this.persistence);
             ThreadPool.getInstance().execute(crawlTargetQueueTask);

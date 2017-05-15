@@ -28,9 +28,9 @@ public class AddToStartUrlsTask implements Runnable{
                 Request request =  new Request(Config.masterAddr.concat("/master/url/addStartUrl"), Method.POST);
                 request.setParams("startUrl", startUrl);
                 request.send();
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             }catch (Exception e){
-                logger.error("向Master中添加startUrl出错");
+                logger.error("向Master中添加startUrl出错{}", e);
             }
         }
     }

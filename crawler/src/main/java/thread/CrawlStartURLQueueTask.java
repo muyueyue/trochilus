@@ -35,12 +35,15 @@ public class CrawlStartURLQueueTask implements Runnable{
         try{
             URLQueue urlQueue = URLQueue.getInstance();
             while(urlQueue.getStartQueueSize() != 0){
-                String startUrl = urlQueue.getStartQueue().poll();
+                String startUrl = urlQueue.getCacheStartQueue().poll();
                 if(startUrl == null){
                     Thread.sleep(Config.errorSleepTime);
                 }
-                Request  request = new Request(startUrl, Method.GET);
+                Request request = new Request(startUrl, Method.GET);
                 Html html = Downloader.getHtml(request);
+                if(html == null){
+                    continue;
+                }
                 if(!this.prefix.equals("")){
                     List<String> temp = html.xPath(this.xPath);
                     List<String> targetUrls = new ArrayList<>();

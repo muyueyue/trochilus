@@ -34,13 +34,16 @@ public class CrawlTargetQueueTask implements Runnable{
         try {
             URLQueue urlQueue = URLQueue.getInstance();
             while (true){
-                String targetUrl = urlQueue.getTargetQueue().poll();
+                String targetUrl = urlQueue.getCacheTargetQueue().poll();
                 if(targetUrl == null){
                     Thread.sleep(Config.errorSleepTime);
                     continue;
                 }
                 Request request = new Request(targetUrl, Method.GET);
                 Html html = Downloader.getHtml(request);
+                if(html == null){
+                    continue;
+                }
                 JSONObject result = new JSONObject();
                 for(JSONObject jsonObject : keyRegexMethod){
                     if(jsonObject.getString("method") == ParseMethod.REGEX.toString()){

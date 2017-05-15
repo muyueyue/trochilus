@@ -26,23 +26,26 @@ public class RedisService {
         JSONObject data = new JSONObject();
         data.put("startUrl", url);
         return data;
+
     }
 
     public JSONArray getStartUrls(String spiderId, int start, int end){
-        List<String> urls = RedisClient.getStartUrls(start, end);
-        if(urls == null){
-            return null;
+        synchronized (RedisService.class){
+            List<String> urls = RedisClient.getStartUrls(start, end);
+            if(urls == null){
+                return null;
+            }
+            SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
+            String pre = String.valueOf(System.currentTimeMillis());
+            JSONArray data = new JSONArray();
+            for(String url : urls){
+                spiderInfo.getBackupStartUrl().offer(pre.concat(url));
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("startUrl", url);
+                data.add(jsonObject);
+            }
+            return data;
         }
-        SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
-        String pre = String.valueOf(System.currentTimeMillis());
-        JSONArray data = new JSONArray();
-        for(String url : urls){
-            spiderInfo.getBackupStartUrl().offer(pre.concat(url));
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("startUrl", url);
-            data.add(jsonObject);
-        }
-        return data;
     }
 
     public JSONObject getTargetUrl(String spiderId){
@@ -56,20 +59,22 @@ public class RedisService {
     }
 
     public JSONArray getTargetUrls(String spiderId, int start, int end){
-        List<String> urls = RedisClient.getTargetUrls(start, end);
-        if(urls == null){
-            return null;
+        synchronized (RedisService.class){
+            List<String> urls = RedisClient.getTargetUrls(start, end);
+            if(urls == null){
+                return null;
+            }
+            SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
+            String pre = String.valueOf(System.currentTimeMillis());
+            JSONArray data = new JSONArray();
+            for(String url : urls){
+                spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("targetUrl", url);
+                data.add(jsonObject);
+            }
+            return data;
         }
-        SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
-        String pre = String.valueOf(System.currentTimeMillis());
-        JSONArray data = new JSONArray();
-        for(String url : urls){
-            spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("targetUrl", url);
-            data.add(jsonObject);
-        }
-        return data;
     }
 
     public void addStartUrl(JSONObject jsonObject){

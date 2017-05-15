@@ -77,6 +77,9 @@ public class URLQueue {
             return;
         }
         for(String string : url){
+            if (StringUtil.isNotURL(string)){
+                continue;
+            }
             cacheTargetQueue.offer(string);
             logger.info("向待爬取缓存队列中添加URL: {}", string);
         }
@@ -87,6 +90,9 @@ public class URLQueue {
             return;
         }
         for(String string : url){
+            if (StringUtil.isNotURL(string)){
+                continue;
+            }
             targetQueue.offer(string);
             logger.info("向待爬取队列中添加URL: {}", string);
         }
@@ -97,6 +103,9 @@ public class URLQueue {
             return;
         }
         for(String string : url){
+            if (StringUtil.isNotURL(string)){
+                continue;
+            }
             cacheStartQueue.offer(string);
             logger.info("向起始缓存队列中添加成功： {}", string);
         }
@@ -107,13 +116,16 @@ public class URLQueue {
             return;
         }
         for(String string : url){
+            if (StringUtil.isNotURL(string)){
+                continue;
+            }
             startQueue.offer(string);
             logger.info("向起始队列中添加成功： {}", string);
         }
     }
 
     public void addURLToTargetQueue(String url){
-        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
+        if(StringUtil.isNotURL(url)){
             return;
         }
         targetQueue.offer(url);
@@ -121,7 +133,7 @@ public class URLQueue {
     }
 
     public void addURLToCacheTargetQueue(String url){
-        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
+        if(StringUtil.isNotURL(url)){
             return;
         }
         cacheTargetQueue.offer(url);
@@ -129,7 +141,7 @@ public class URLQueue {
     }
 
     public void addToCacheStartQueue(String url){
-        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
+        if(StringUtil.isNotURL(url)){
             return;
         }
         cacheStartQueue.offer(url);
@@ -137,7 +149,7 @@ public class URLQueue {
     }
 
     public void addToStartQueue(String url){
-        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
+        if(StringUtil.isNotURL(url)){
             return;
         }
         startQueue.offer(url);
@@ -145,7 +157,7 @@ public class URLQueue {
     }
 
     public void addURLToFinishQueue(String url){
-        if(StringUtil.isNotURL(url) || StringUtil.isNotURL(url)){
+        if(StringUtil.isNotURL(url)){
             return;
         }
         finishQueue.offer(url);

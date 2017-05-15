@@ -27,9 +27,9 @@ public class AddToFinishUrlsTask implements Runnable{
                 Request request = new Request(Config.masterAddr.concat("/master/url/addFinishUrl" + Config.spiderId), Method.POST);
                 request.setParams("finishUrl", finishUrl);
                 request.send();
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             }catch (Exception e){
-                logger.error("向Redis中添加完成爬取的URL出错 {}", e);
+                logger.error("向Master中添加完成爬取的URL出错 {}", e);
             }
         }
     }

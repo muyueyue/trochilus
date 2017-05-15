@@ -27,9 +27,9 @@ public class AddToTargetUrlsTask implements Runnable{
                 Request request = new Request(Config.masterAddr.concat("/master/url/addTargetUrl" + Config.spiderId), Method.POST);
                 request.setParams("targetUrl", url);
                 request.send();
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             }catch (Exception e){
-                logger.error("向Master中添加带爬取的URL出错");
+                logger.error("向Master中添加带爬取的URL出错{}", e);
             }
         }
     }
