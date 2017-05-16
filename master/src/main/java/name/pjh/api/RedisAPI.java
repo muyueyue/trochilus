@@ -28,7 +28,7 @@ public class RedisAPI {
     public Response getStartUrl(@RequestParam("spiderId") String spiderId,
                                 @RequestParam(value = "start", defaultValue = "0") int start,
                                 @RequestParam(value = "end", defaultValue = "0") int end){
-        logger.info("收到爬虫 {}　请求起始URL的命令", spiderId);
+        logger.info("收到爬虫{}获取起始URL的命令", spiderId);
         if(start == 0 && end == 0){
             JSONObject content = redisService.getStartUrl(spiderId);
             if(content == null){
@@ -97,7 +97,7 @@ public class RedisAPI {
 
     @PostMapping("/addFinishUrl")
     public Response addFinishUrl(@RequestBody String body){
-        logger.info("收到向Redis中添加完成的URL的命令 {}", body);
+        logger.info("收到向Redis中添加完成URL的命令 {}", body);
         JSONObject param = JSONObject.parseObject(body);
         if(param.containsKey("finishUrls")){
             redisService.addFinishUrl(param.getJSONArray("finishUrls"));

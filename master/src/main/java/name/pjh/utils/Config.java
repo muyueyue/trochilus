@@ -7,7 +7,7 @@ package name.pjh.utils;
  */
 public class Config {
 
-    public static String redisIP = "localhost";
+    public static String redisIP = "127.0.0.1";
 
     public static int redisPort = 6379;
 

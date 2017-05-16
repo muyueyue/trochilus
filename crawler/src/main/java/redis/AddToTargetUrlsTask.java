@@ -6,6 +6,7 @@ import thread.URLQueue;
 import utils.Config;
 import utils.Method;
 import utils.Request;
+import utils.Response;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -23,11 +24,19 @@ public class AddToTargetUrlsTask implements Runnable{
         BlockingQueue<String> cacheTargetQueue = URLQueue.getInstance().getCacheTargetQueue();
         while (true){
             try {
-                String url = cacheTargetQueue.poll();
-                Request request = new Request(Config.masterAddr.concat("/master/url/addTargetUrl" + Config.spiderId), Method.POST);
-                request.setParams("targetUrl", url);
-                request.send();
                 Thread.sleep(5000);
+                String url = cacheTargetQueue.poll();
+                if (url == null){
+                    continue;
+                }
+                Request request = new Request(Config.masterAddr.concat("/master/url/addTargetUrl?spiderId=" + Config.spiderId), Method.POST);
+                request.setParams("targetUrl", url);
+                Response response = request.send();
+                if(response.isSuccess()){
+                    logger.info("向Master中添加带爬取的URL成功");
+                }else {
+                    logger.error("向Master中添加带爬取的URL失败");
+                }
             }catch (Exception e){
                 logger.error("向Master中添加带爬取的URL出错{}", e);
             }

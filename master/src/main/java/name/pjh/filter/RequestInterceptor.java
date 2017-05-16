@@ -2,6 +2,8 @@ package name.pjh.filter;
 
 import name.pjh.spider.SpiderInfo;
 import name.pjh.spider.SpiderPool;
+import name.pjh.utils.Response;
+import name.pjh.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -30,11 +32,15 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String spiderId = httpServletRequest.getParameter("spiderId");
+        if(StringUtil.isEmpty(spiderId)){
+            logger.error("未获取到爬虫的身份标识");
+            return false;
+        }
         String clientIp = httpServletRequest.getRemoteAddr();
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
         if(spiderInfo == null){
-            String requestPath = httpServletRequest.getRequestURI();
-            if(requestPath.indexOf("register") == -1){
+            String path = httpServletRequest.getRequestURI();
+            if(path.indexOf("register") == -1){
                 return false;
             }
             return true;

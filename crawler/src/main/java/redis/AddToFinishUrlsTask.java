@@ -6,6 +6,7 @@ import thread.URLQueue;
 import utils.Config;
 import utils.Method;
 import utils.Request;
+import utils.Response;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -23,11 +24,19 @@ public class AddToFinishUrlsTask implements Runnable{
         BlockingQueue<String> finishQueue = URLQueue.getInstance().getFinishQueue();
         while (true){
             try {
-                String finishUrl = finishQueue.poll();
-                Request request = new Request(Config.masterAddr.concat("/master/url/addFinishUrl" + Config.spiderId), Method.POST);
-                request.setParams("finishUrl", finishUrl);
-                request.send();
                 Thread.sleep(5000);
+                String finishUrl = finishQueue.poll();
+                if(finishUrl == null){
+                    continue;
+                }
+                Request request = new Request(Config.masterAddr.concat("/master/url/addFinishUrl?spiderId=" + Config.spiderId), Method.POST);
+                request.setParams("finishUrl", finishUrl);
+                Response response = request.send();
+                if(response.isSuccess()){
+                    logger.info("向Master中添加完成爬取的URL成功");
+                }else {
+                    logger.error("向Master中添加完成爬取的URL失败");
+                }
             }catch (Exception e){
                 logger.error("向Master中添加完成爬取的URL出错 {}", e);
             }

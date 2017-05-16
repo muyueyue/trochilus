@@ -48,10 +48,7 @@ public class Response {
 
     public boolean isSuccess(){
         JSONObject jsonObject = JSONObject.parseObject(this.content);
-        if(jsonObject.containsKey("isSuccess") && jsonObject.getBooleanValue("isSuccess")){
-            return true;
-        }
-        return false;
+        return jsonObject.containsKey("isSuccess") && jsonObject.getBooleanValue("isSuccess");
     }
 
     public JSONArray getJsonArrayValue(String key){

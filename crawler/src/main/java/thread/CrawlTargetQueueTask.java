@@ -34,7 +34,7 @@ public class CrawlTargetQueueTask implements Runnable{
         try {
             URLQueue urlQueue = URLQueue.getInstance();
             while (true){
-                String targetUrl = urlQueue.getCacheTargetQueue().poll();
+                String targetUrl = urlQueue.getTargetQueue().poll();
                 if(targetUrl == null){
                     Thread.sleep(Config.errorSleepTime);
                     continue;

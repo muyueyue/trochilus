@@ -3,10 +3,7 @@ package redis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import thread.URLQueue;
-import utils.Config;
-import utils.Method;
-import utils.Request;
-import utils.StringUtil;
+import utils.*;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -24,11 +21,19 @@ public class AddToStartUrlsTask implements Runnable{
         BlockingQueue<String> cacheStartQueue = URLQueue.getInstance().getCacheStartQueue();
         while (true){
             try {
-                String startUrl = cacheStartQueue.poll();
-                Request request =  new Request(Config.masterAddr.concat("/master/url/addStartUrl"), Method.POST);
-                request.setParams("startUrl", startUrl);
-                request.send();
                 Thread.sleep(5000);
+                String startUrl = cacheStartQueue.poll();
+                if(startUrl == null){
+                    continue;
+                }
+                Request request =  new Request(Config.masterAddr.concat("/master/url/addStartUrl?spiderId=" + Config.spiderId), Method.POST);
+                request.setParams("startUrl", startUrl);
+                Response response = request.send();
+                if(response.isSuccess()){
+                    logger.info("向Master中添加startUrl成功");
+                }else {
+                    logger.error("向Master中添加startUrl失败");
+                }
             }catch (Exception e){
                 logger.error("向Master中添加startUrl出错{}", e);
             }

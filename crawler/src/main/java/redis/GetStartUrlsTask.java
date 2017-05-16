@@ -26,20 +26,22 @@ public class GetStartUrlsTask implements Runnable{
         URLQueue urlQueue = URLQueue.getInstance();
         while (true){
             try {
+                Thread.sleep(5000);
                 Request request = new Request(Config.masterAddr.concat("/master/url/getStartUrl?start=1&end=10&spiderId=" + Config.spiderId), Method.GET);
                 Response response = request.send();
                 if(response.isSuccess()){
-                    JSONArray startUrls = response.getJsonArrayValue("content").getJSONArray(0);
-                    if(startUrls == null){
+                    JSONArray startUrls = response.getJsonArrayValue("content");
+                    if(startUrls == null && startUrls.size() == 0){
                         continue;
                     }
                     for(int i = 0; i < startUrls.size(); i++){
                         urlQueue.addToStartQueue(startUrls.getJSONObject(i).getString("startUrl"));
                     }
+                }else {
+                    logger.error("获取Master中的startUrl失败");
                 }
-                Thread.sleep(5000);
             }catch (Exception e){
-                logger.error("从Master中获取startUrl出错 {}", e);
+                logger.error("获取Master中的startUrl出错 {}", e);
             }
         }
     }

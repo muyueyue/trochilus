@@ -83,7 +83,7 @@ public class Spider {
             URLQueue urlQueue = URLQueue.getInstance();
             for(int i = 1; i <= limit; i++){
                 String temp = url.replace("{}", String.valueOf(i));
-                urlQueue.addURLToTargetQueue(temp);
+                urlQueue.addURLToCacheTargetQueue(temp);
             }
             return this;
     }
@@ -132,7 +132,7 @@ public class Spider {
 
     public Spider addToTargetQueue(String regex){
         URLQueue urlQueue = URLQueue.getInstance();
-        urlQueue.addToStartQueue(this.startUrl);
+        urlQueue.addToCacheStartQueue(this.startUrl);
         CrawlStartURLQueueTask crawlStartURLQueueTask = new CrawlStartURLQueueTask(regex, "");
         ThreadPool.getInstance().execute(crawlStartURLQueueTask);
         return this;
@@ -140,7 +140,7 @@ public class Spider {
 
     public Spider addToTargetQueue(String regex, String prefix){
         URLQueue urlQueue = URLQueue.getInstance();
-        urlQueue.addToStartQueue(this.startUrl);
+        urlQueue.addToCacheStartQueue(this.startUrl);
         CrawlStartURLQueueTask crawlStartURLQueueTask = new CrawlStartURLQueueTask(regex, prefix);
         ThreadPool.getInstance().execute(crawlStartURLQueueTask);
         return this;

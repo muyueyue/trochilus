@@ -35,7 +35,7 @@ public class CrawlStartURLQueueTask implements Runnable{
         try{
             URLQueue urlQueue = URLQueue.getInstance();
             while(urlQueue.getStartQueueSize() != 0){
-                String startUrl = urlQueue.getCacheStartQueue().poll();
+                String startUrl = urlQueue.getStartQueue().poll();
                 if(startUrl == null){
                     Thread.sleep(Config.errorSleepTime);
                 }

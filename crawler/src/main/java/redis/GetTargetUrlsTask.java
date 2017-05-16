@@ -23,18 +23,20 @@ public class GetTargetUrlsTask implements Runnable{
         URLQueue urlQueue = URLQueue.getInstance();
         while (true){
             try {
+                Thread.sleep(5000);
                 Request request = new Request(Config.masterAddr.concat("/master/url/getTargetUrl?start=1&end=10&spiderId=" + Config.spiderId), Method.GET);
                 Response response = request.send();
                 if(response.isSuccess()){
-                    JSONArray targetUrls = response.getJsonArrayValue("content").getJSONArray(0);
-                    if(targetUrls == null){
+                    JSONArray targetUrls = response.getJsonArrayValue("content");
+                    if(targetUrls == null && targetUrls.size() == 0){
                         continue;
                     }
                     for(int i = 0; i < targetUrls.size(); i++){
                         urlQueue.addURLToTargetQueue(targetUrls.getJSONObject(i).getString("targetUrl"));
                     }
+                }else {
+                    logger.error("获取Master中的targetUrl失败");
                 }
-                Thread.sleep(5000);
             }catch (Exception e){
                 logger.error("获取Master中的targetUrl出错{}", e);
             }

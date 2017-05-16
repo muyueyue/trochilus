@@ -16,8 +16,7 @@ public class Response {
 
     private String errorMeg;
 
-    public Response(){
-    }
+    public Response(){}
 
     public Response success(){
         this.isSuccess = true;
@@ -34,7 +33,7 @@ public class Response {
         return this;
     }
 
-    public boolean isSuccess() {
+    public boolean getIsSuccess() {
         return isSuccess;
     }
 
@@ -50,10 +49,8 @@ public class Response {
         this.errorMeg = errorMeg;
         return this;
     }
-
-    public static void main(String[] args) {
-        Response response = new Response();
-        response.success().content("{\"name\":\"pjh\",\"age\":22}");
-        System.out.println(response.toString());
+    @Override
+    public String toString(){
+        return "{\"isSuccess\":" + this.isSuccess + ",\"content\":" + this.content.toString() + ",\"errorMeg\":\"" + this.errorMeg + "\"}";
     }
 }
