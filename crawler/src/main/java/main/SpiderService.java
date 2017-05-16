@@ -27,10 +27,11 @@ public class SpiderService {
         return true;
     }
 
-    public boolean register(String spiderId){
+    public boolean register(){
         logger.info("正在注册爬虫");
+        getSpiderId();
         Request request = new Request(Config.masterAddr.concat("/master/spider/register"), Method.POST);
-        request.setParams("spiderId", spiderId);
+        request.setParams("spiderId", Config.spiderId);
         Response response = request.send();
         if(response.isSuccess()){
             logger.info("爬虫注册成功");

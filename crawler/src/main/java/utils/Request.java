@@ -94,6 +94,7 @@ public class Request {
     }
 
     public Request(String url, Method method){
+        this.params = new HashMap<>();
         this.url = url;
         this.method = method;
     }

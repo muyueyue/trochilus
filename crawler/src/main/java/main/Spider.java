@@ -169,7 +169,7 @@ public class Spider {
     }
 
     public void run(){
-        if(!spiderService.getSpiderId() && spiderService.register(Config.spiderId)){
+        if(!spiderService.register()){
             logger.error("爬虫注册失败");
             return;
         }
