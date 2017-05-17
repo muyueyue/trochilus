@@ -77,6 +77,7 @@ public class CrawlTargetQueueTask implements Runnable{
                 if(persistence.contains("db")){
                     DataPersistence.insert(result);
                 }
+                Thread.sleep(1000);
             }
         }catch (Exception e){
             logger.error("爬虫任务出错: {}", e);

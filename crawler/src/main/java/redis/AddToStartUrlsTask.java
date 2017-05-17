@@ -21,7 +21,7 @@ public class AddToStartUrlsTask implements Runnable{
         BlockingQueue<String> cacheStartQueue = URLQueue.getInstance().getCacheStartQueue();
         while (true){
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
                 String startUrl = cacheStartQueue.poll();
                 if(startUrl == null){
                     continue;
@@ -30,9 +30,9 @@ public class AddToStartUrlsTask implements Runnable{
                 request.setParams("startUrl", startUrl);
                 Response response = request.send();
                 if(response.isSuccess()){
-                    logger.info("向Master中添加startUrl成功");
+                    logger.info("向Master中添加startUrl:{}成功", startUrl);
                 }else {
-                    logger.error("向Master中添加startUrl失败");
+                    logger.error("向Master中添加startUrl:{}失败", startUrl);
                 }
             }catch (Exception e){
                 logger.error("向Master中添加startUrl出错{}", e);

@@ -125,7 +125,7 @@ public class URLQueue {
     }
 
     public void addURLToTargetQueue(String url){
-        if(StringUtil.isNotURL(url)){
+        if(StringUtil.isEmpty(url) || StringUtil.isNotURL(url)){
             return;
         }
         targetQueue.offer(url);

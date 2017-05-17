@@ -24,7 +24,7 @@ public class AddToTargetUrlsTask implements Runnable{
         BlockingQueue<String> cacheTargetQueue = URLQueue.getInstance().getCacheTargetQueue();
         while (true){
             try {
-                Thread.sleep(5000);
+                Thread.sleep(500);
                 String url = cacheTargetQueue.poll();
                 if (url == null){
                     continue;
@@ -33,12 +33,12 @@ public class AddToTargetUrlsTask implements Runnable{
                 request.setParams("targetUrl", url);
                 Response response = request.send();
                 if(response.isSuccess()){
-                    logger.info("向Master中添加带爬取的URL成功");
+                    logger.info("向Master中添加待爬取的URL:{}成功", url);
                 }else {
-                    logger.error("向Master中添加带爬取的URL失败");
+                    logger.error("向Master中添加待爬取的URL:{}失败", url);
                 }
             }catch (Exception e){
-                logger.error("向Master中添加带爬取的URL出错{}", e);
+                logger.error("向Master中添加待爬取的URL出错{}", e);
             }
         }
     }

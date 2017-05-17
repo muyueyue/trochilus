@@ -34,7 +34,7 @@ public class CrawlStartURLQueueTask implements Runnable{
     public void run(){
         try{
             URLQueue urlQueue = URLQueue.getInstance();
-            while(urlQueue.getStartQueueSize() != 0){
+            while(true){
                 String startUrl = urlQueue.getStartQueue().poll();
                 if(startUrl == null){
                     Thread.sleep(Config.errorSleepTime);
@@ -50,10 +50,11 @@ public class CrawlStartURLQueueTask implements Runnable{
                     for(String url : temp){
                         targetUrls.add(this.prefix.concat(url));
                     }
-                    urlQueue.addURLToTargetQueue(targetUrls);
+                    urlQueue.addURLToCacheTargetQueue(targetUrls);
                 }
-                urlQueue.addURLToTargetQueue(html.xPath(this.xPath));
+                urlQueue.addURLToCacheTargetQueue(html.xPath(this.xPath));
                 urlQueue.addURLToFinishQueue(startUrl);
+                Thread.sleep(5000);
             }
         }catch (Exception e){
             logger.error("爬虫任务出错: {}", e);

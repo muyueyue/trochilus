@@ -59,6 +59,14 @@ public class Response {
         return null;
     }
 
+    public JSONObject getJsonObject(String key){
+        JSONObject jsonObject = JSONObject.parseObject(this.content);
+        if(jsonObject.containsKey(key)){
+            return jsonObject.getJSONObject(key);
+        }
+        return null;
+    }
+
     public String getContent() {
         return content;
     }

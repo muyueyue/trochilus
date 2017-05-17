@@ -6,6 +6,8 @@ import name.pjh.redis.RedisClient;
 import name.pjh.spider.SpiderInfo;
 import name.pjh.spider.SpiderPool;
 import name.pjh.utils.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -18,13 +20,16 @@ import java.util.List;
 @Service
 public class RedisService {
 
+    private static final Logger logger = LoggerFactory.getLogger(RedisService.class);
+
     public JSONObject getStartUrl(String spiderId){
         String url = RedisClient.getStartUrl();
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
         String pre = String.valueOf(System.currentTimeMillis());
-        spiderInfo.getBackupStartUrl().offer(pre.concat(url));
+        //spiderInfo.getBackupStartUrl().offer(pre.concat(url));
         JSONObject data = new JSONObject();
         data.put("startUrl", url);
+        logger.info("爬虫获取到的起始URL数据为:{}", data);
         return data;
 
     }
@@ -39,11 +44,12 @@ public class RedisService {
             String pre = String.valueOf(System.currentTimeMillis());
             JSONArray data = new JSONArray();
             for(String url : urls){
-                spiderInfo.getBackupStartUrl().offer(pre.concat(url));
+                //spiderInfo.getBackupStartUrl().offer(pre.concat(url));
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("startUrl", url);
                 data.add(jsonObject);
             }
+            logger.info("爬虫获取到的起始URL数据为:{}", data);
             return data;
         }
     }
@@ -52,9 +58,10 @@ public class RedisService {
         String url = RedisClient.getTargetUrl();
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
         String pre = String.valueOf(System.currentTimeMillis());
-        spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
+        //spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
         JSONObject data = new JSONObject();
         data.put("targetUrl", url);
+        logger.info("爬虫获取到的待爬取URL数据为:{}", data);
         return data;
     }
 
@@ -68,11 +75,12 @@ public class RedisService {
             String pre = String.valueOf(System.currentTimeMillis());
             JSONArray data = new JSONArray();
             for(String url : urls){
-                spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
+                //spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("targetUrl", url);
                 data.add(jsonObject);
             }
+            logger.info("爬虫获取到的待爬取URL数据为:{}", data);
             return data;
         }
     }

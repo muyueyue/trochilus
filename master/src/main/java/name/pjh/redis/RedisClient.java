@@ -23,7 +23,9 @@ public class RedisClient {
     }
 
     public static void addToStartUrls(String url){
+        Jedis jedis = RedisConnection.getJedisCon();
         RedisConnection.getJedisCon().lpush(Config.redisStartUrls, url);
+        RedisConnection.returnJedis(jedis);
     }
 
     public static void addToStartUrls(List<String> urls){
@@ -34,14 +36,24 @@ public class RedisClient {
         for(String url : urls){
             jedis.lpush(Config.redisStartUrls, url);
         }
+        RedisConnection.returnJedis(jedis);
     }
 
     public static String getStartUrl(){
-        return RedisConnection.getJedisCon().lpop(Config.redisStartUrls);
+        Jedis jedis = RedisConnection.getJedisCon();
+        String startUrl = jedis.lpop(Config.redisStartUrls);
+        RedisConnection.returnJedis(jedis);
+        return startUrl;
     }
 
     public static List<String> getStartUrls(int start, int end){
-        return RedisConnection.getJedisCon().lrange(Config.redisStartUrls, start, end);
+        Jedis jedis = RedisConnection.getJedisCon();
+        List<String> list = jedis.lrange(Config.redisStartUrls, start, end);
+        for(int i = start; i <= end; i++){
+            jedis.lpop(Config.redisStartUrls);
+        }
+        RedisConnection.returnJedis(jedis);
+        return list;
     }
 
     public static void addToTargetUrls(List<String> urls){
@@ -52,18 +64,30 @@ public class RedisClient {
         for(String url : urls){
             jedis.lpush(Config.redisTargetUrls, url);
         }
+        RedisConnection.returnJedis(jedis);
     }
 
     public static String getTargetUrl(){
-        return RedisConnection.getJedisCon().lpop(Config.redisTargetUrls);
+        Jedis jedis = RedisConnection.getJedisCon();
+        String targetUrl = jedis.lpop(Config.redisTargetUrls);
+        RedisConnection.returnJedis(jedis);
+        return targetUrl;
     }
 
     public static List<String> getTargetUrls(int start, int end){
-        return RedisConnection.getJedisCon().lrange(Config.redisTargetUrls, start, end);
+        Jedis jedis = RedisConnection.getJedisCon();
+        List<String> list = jedis.lrange(Config.redisTargetUrls, start, end);
+        for(int i = start; i <= end; i++){
+            jedis.lpop(Config.redisTargetUrls);
+        }
+        RedisConnection.returnJedis(jedis);
+        return list;
     }
 
     public static void addToFinishUrls(String url){
-        RedisConnection.getJedisCon().sadd(Config.redisFinishUrls, url);
+        Jedis jedis = RedisConnection.getJedisCon();
+        jedis.sadd(Config.redisFinishUrls, url);
+        RedisConnection.returnJedis(jedis);
     }
 
     public static void addToFinishUrls(List<String> urls){
@@ -74,5 +98,6 @@ public class RedisClient {
         for(String url : urls){
             jedis.sadd(Config.redisFinishUrls, url);
         }
+        RedisConnection.returnJedis(jedis);
     }
 }

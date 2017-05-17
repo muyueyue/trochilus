@@ -10,13 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>crawler</artifactId>
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.3.1</version>
+            <version>3.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>3.4.0</version>
         </dependency>
     </dependencies>
 </project>

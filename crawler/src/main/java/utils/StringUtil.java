@@ -130,7 +130,7 @@ public class StringUtil {
      */
     public static boolean isNotURL(String string){
         String regx = "[a-zA-z]+://[^\\s]*";
-        if(string.matches(regx)){
+        if(isNotEmpty(string) && string.matches(regx)){
             return false;
         }
         return true;
