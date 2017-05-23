@@ -174,9 +174,11 @@ public class Spider {
             return;
         }
         HttpTask.startHttpTask();
+        ThreadPool pool = ThreadPool.getInstance();
+        pool.execute(new AddStartUrlTask());
         for(int i = 0; i < this.threadNum; i++){
             CrawlTargetQueueTask crawlTargetQueueTask = new CrawlTargetQueueTask(this.keyRegexMethod, this.persistence);
-            ThreadPool.getInstance().execute(crawlTargetQueueTask);
+            pool.execute(crawlTargetQueueTask);
         }
     }
 }

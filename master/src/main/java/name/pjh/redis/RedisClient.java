@@ -1,6 +1,7 @@
 package name.pjh.redis;
 
 import name.pjh.utils.Config;
+import name.pjh.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
@@ -42,6 +43,9 @@ public class RedisClient {
     public static String getStartUrl(){
         Jedis jedis = RedisConnection.getJedisCon();
         String startUrl = jedis.lpop(Config.redisStartUrls);
+        if(StringUtil.isEmpty(startUrl)){
+            logger.error("获取到的startUrl为空");
+        }
         RedisConnection.returnJedis(jedis);
         return startUrl;
     }
@@ -49,6 +53,9 @@ public class RedisClient {
     public static List<String> getStartUrls(int start, int end){
         Jedis jedis = RedisConnection.getJedisCon();
         List<String> list = jedis.lrange(Config.redisStartUrls, start, end);
+        if(list == null){
+            logger.error("获取到的startUrl为空");
+        }
         for(int i = start; i <= end; i++){
             jedis.lpop(Config.redisStartUrls);
         }
@@ -70,6 +77,9 @@ public class RedisClient {
     public static String getTargetUrl(){
         Jedis jedis = RedisConnection.getJedisCon();
         String targetUrl = jedis.lpop(Config.redisTargetUrls);
+        if(StringUtil.isEmpty(targetUrl)){
+            logger.error("获取的targetUrl为空");
+        }
         RedisConnection.returnJedis(jedis);
         return targetUrl;
     }
@@ -77,6 +87,9 @@ public class RedisClient {
     public static List<String> getTargetUrls(int start, int end){
         Jedis jedis = RedisConnection.getJedisCon();
         List<String> list = jedis.lrange(Config.redisTargetUrls, start, end);
+        if(list == null){
+            logger.error("获取的targetUrl为空");
+        }
         for(int i = start; i <= end; i++){
             jedis.lpop(Config.redisTargetUrls);
         }

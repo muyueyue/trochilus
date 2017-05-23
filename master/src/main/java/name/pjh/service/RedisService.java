@@ -56,12 +56,15 @@ public class RedisService {
 
     public JSONObject getTargetUrl(String spiderId){
         String url = RedisClient.getTargetUrl();
+        if(StringUtil.isEmpty(url)){
+            logger.error("获取到的targetUrl为空");
+        }
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
         String pre = String.valueOf(System.currentTimeMillis());
         //spiderInfo.getBackupTargetUrl().offer(pre.concat(url));
         JSONObject data = new JSONObject();
         data.put("targetUrl", url);
-        logger.info("爬虫获取到的待爬取URL数据为:{}", data);
+        //logger.info("爬虫获取到的待爬取URL数据为:{}", data.toString());
         return data;
     }
 
@@ -69,6 +72,7 @@ public class RedisService {
         synchronized (RedisService.class){
             List<String> urls = RedisClient.getTargetUrls(start, end);
             if(urls == null){
+                logger.error("获取到的targetUrl为空");
                 return null;
             }
             SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
@@ -80,7 +84,7 @@ public class RedisService {
                 jsonObject.put("targetUrl", url);
                 data.add(jsonObject);
             }
-            logger.info("爬虫获取到的待爬取URL数据为:{}", data);
+            //logger.info("爬虫获取到的待爬取URL数据为:{}", data.toString());
             return data;
         }
     }
@@ -91,6 +95,7 @@ public class RedisService {
         }
         String url = jsonObject.getString("startUrl");
         if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+            logger.error("startUrl为空或已经存在，向Redis中添加失败");
             return;
         }
         RedisClient.addToStartUrls(url);
@@ -103,6 +108,7 @@ public class RedisService {
         for(int i = 0; i < jsonArray.size(); i++){
             String url = jsonArray.getJSONObject(i).getString("startUrl");
             if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+                logger.error("startUrl为空或已经存在，向Redis中添加失败");
                 continue;
             }
             RedisClient.addToStartUrls(url);
@@ -122,6 +128,7 @@ public class RedisService {
         }
         String url = jsonObject.getString("targetUrl");
         if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+            logger.error("targetUrl为空或已经存在，向Redis中添加失败");
             return;
         }
         RedisClient.addToTargetUrls(url);
@@ -134,6 +141,7 @@ public class RedisService {
         for(int i = 0; i < jsonArray.size(); i++){
             String url = jsonArray.getJSONObject(i).getString("targetUrl");
             if(StringUtil.isNotURL(url) || StringUtil.urlIsRepetition(url)){
+                logger.error("targetUrl为空或已经存在，向Redis中添加失败");
                 continue;
             }
             RedisClient.addToTargetUrls(url);

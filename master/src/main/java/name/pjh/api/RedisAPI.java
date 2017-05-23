@@ -54,6 +54,7 @@ public class RedisAPI {
             if(content ==  null){
                 return new Response().error().errorMeg("获取待爬取的URL出错");
             }
+            logger.info("爬虫收到的TargetUrls为:{}", content.toString());
             return new Response().success().content(content);
         }else {
          JSONArray content = redisService.getTargetUrls(spiderId, start, end);

@@ -21,7 +21,7 @@ public class AddToStartUrlsTask implements Runnable{
         BlockingQueue<String> cacheStartQueue = URLQueue.getInstance().getCacheStartQueue();
         while (true){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 String startUrl = cacheStartQueue.poll();
                 if(startUrl == null){
                     continue;

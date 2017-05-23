@@ -24,7 +24,7 @@ public class AddToFinishUrlsTask implements Runnable{
         BlockingQueue<String> finishQueue = URLQueue.getInstance().getFinishQueue();
         while (true){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 String finishUrl = finishQueue.poll();
                 if(finishUrl == null){
                     continue;

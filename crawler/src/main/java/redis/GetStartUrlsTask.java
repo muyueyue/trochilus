@@ -27,7 +27,7 @@ public class GetStartUrlsTask implements Runnable{
         URLQueue urlQueue = URLQueue.getInstance();
         while (true){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 Request request = new Request(Config.masterAddr.concat("/master/url/getStartUrl?start=0&end=0&spiderId=" + Config.spiderId), Method.GET);
                 Response response = request.send();
                 if(response.isSuccess()){

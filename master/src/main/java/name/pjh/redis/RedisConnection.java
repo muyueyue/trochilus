@@ -23,9 +23,9 @@ public class RedisConnection {
     static {
         try{
             JedisPoolConfig config = new JedisPoolConfig();
-            config.setMaxTotal(1024);
+            config.setMaxTotal(5000);
             config.setMaxIdle(10);
-            config.setMaxWaitMillis(1000);
+            config.setMaxWaitMillis(10000);
             config.setTestOnBorrow(true);
             config.setTestOnReturn(true);
             jedisPool = new JedisPool(config, Config.redisIP, Config.redisPort);
@@ -43,6 +43,9 @@ public class RedisConnection {
             return null;
         }
         Jedis jedis = jedisPool.getResource();
+        if(jedis == null){
+            logger.error("Redis客户端资源不足，需等待");
+        }
         return jedis;
     }
 

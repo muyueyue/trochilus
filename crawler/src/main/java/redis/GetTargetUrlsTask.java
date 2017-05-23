@@ -25,6 +25,7 @@ public class GetTargetUrlsTask implements Runnable{
         while (true){
             try {
                 Thread.sleep(500);
+                logger.info("向Master获取targetUrl");
                 Request request = new Request(Config.masterAddr.concat("/master/url/getTargetUrl?start=0&end=0&spiderId=" + Config.spiderId), Method.GET);
                 Response response = request.send();
                 if(response.isSuccess()){
