@@ -2,14 +2,12 @@ package redis;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import manage.WorkInfo;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import thread.URLQueue;
-import utils.Config;
-import utils.Method;
-import utils.Request;
-import utils.Response;
+import utils.*;
 
 import java.util.HashMap;
 
@@ -27,7 +25,7 @@ public class GetStartUrlsTask implements Runnable{
         URLQueue urlQueue = URLQueue.getInstance();
         while (true){
             try {
-                Thread.sleep(500);
+                Thread.sleep(5000);
                 Request request = new Request(Config.masterAddr.concat("/master/url/getStartUrl?start=0&end=0&spiderId=" + Config.spiderId), Method.GET);
                 Response response = request.send();
                 if(response.isSuccess()){
@@ -39,10 +37,11 @@ public class GetStartUrlsTask implements Runnable{
                         urlQueue.addToStartQueue(startUrls.getJSONObject(i).getString("startUrl"));
                     }*/
                     JSONObject startUrl = response.getJsonObject("content");
-                    if(startUrl == null){
+                    if(startUrl == null || StringUtil.isEmpty(startUrl.getString("startUrl"))){
                         continue;
                     }
                     urlQueue.addToStartQueue(startUrl.getString("startUrl"));
+                    WorkInfo.getInstance().setStartUrlsNum(1);
                 }else {
                     logger.error("获取Master中的startUrl失败");
                 }

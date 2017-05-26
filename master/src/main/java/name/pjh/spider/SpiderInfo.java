@@ -26,6 +26,14 @@ public class SpiderInfo {
 
     private String clientIp;
 
+    private long startUrlsNum;
+
+    private long targetUrlsNum;
+
+    private long finishStartUrlsNum;
+
+    private long finishTargetUrlsNum;
+
     public SpiderInfo(String spiderId){
         this.spiderId = spiderId;
         this.backupStartUrl = new LinkedBlockingDeque<>();
@@ -60,5 +68,37 @@ public class SpiderInfo {
     public void setClientIp(String clientIp) {
 
         this.clientIp = clientIp;
+    }
+
+    public long getStartUrlsNum() {
+        return startUrlsNum;
+    }
+
+    public void setStartUrlsNum(long startUrlsNum) {
+        this.startUrlsNum = startUrlsNum;
+    }
+
+    public long getTargetUrlsNum() {
+        return targetUrlsNum;
+    }
+
+    public void setTargetUrlsNum(long targetUrlsNum) {
+        this.targetUrlsNum = targetUrlsNum;
+    }
+
+    public long getFinishStartUrlsNum() {
+        return finishStartUrlsNum;
+    }
+
+    public void setFinishStartUrlsNum(long finishStartUrlsNum) {
+        this.finishStartUrlsNum = finishStartUrlsNum;
+    }
+
+    public long getFinishTargetUrlsNum() {
+        return finishTargetUrlsNum;
+    }
+
+    public void setFinishTargetUrls(long finishTargetUrls) {
+        this.finishTargetUrlsNum = finishTargetUrls;
     }
 }

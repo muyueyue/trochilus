@@ -1,8 +1,8 @@
 persistence/FilePersistence.class
-DynamicData/SeleniumDownloader.class
 utils/BloomFilter.class
 utils/StringUtil.class
 utils/Method.class
+main/example/Test.class
 thread/CrawlTargetQueueTask.class
 persistence/MongoDBJDBC.class
 parse/Html.class
@@ -20,13 +20,18 @@ redis/AddToStartUrlsTask.class
 redis/GetTargetUrlsTask.class
 parse/Select.class
 utils/Config.class
+parse/PkuParse.class
 thread/CrawlStartURLQueueTask.class
+dynamicdata/SeleniumDownloader.class
+manage/task/ManageTask.class
 utils/BloomFilter$Hash.class
+dynamicdata/example/DynamicTest.class
 utils/Util.class
 utils/ParseMethod.class
 proxy/ParseProxy.class
 redis/AddToFinishUrlsTask.class
 exception/DBException.class
+manage/WorkInfo.class
 thread/ThreadPool.class
 redis/GetStartUrlsTask.class
 download/Downloader.class
@@ -36,5 +41,5 @@ proxy/GetProxy.class
 utils/Response.class
 utils/Request.class
 proxy/ProxyTask.class
-DynamicData/example/DynamicTest.class
 main/example/SpiderTest.class
+persistence/HbaseJDBC.class

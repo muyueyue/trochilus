@@ -32,14 +32,17 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String spiderId = httpServletRequest.getParameter("spiderId");
+        String path = httpServletRequest.getRequestURI();
         if(StringUtil.isEmpty(spiderId)){
-            logger.error("未获取到爬虫的身份标识");
-            return false;
+            if(path.indexOf("getAllSpiderWorkInfo") == -1){
+                logger.error("未获取到爬虫的身份标识");
+                return false;
+            }
+            return true;
         }
         String clientIp = httpServletRequest.getRemoteAddr();
         SpiderInfo spiderInfo = SpiderPool.getInstance().getSpider(spiderId);
         if(spiderInfo == null){
-            String path = httpServletRequest.getRequestURI();
             if(path.indexOf("register") == -1){
                 return false;
             }

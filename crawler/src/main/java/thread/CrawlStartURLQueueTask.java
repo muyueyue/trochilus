@@ -1,6 +1,7 @@
 package thread;
 
 import download.Downloader;
+import manage.WorkInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import parse.Html;
@@ -44,6 +45,7 @@ public class CrawlStartURLQueueTask implements Runnable{
                 if(html == null){
                     continue;
                 }
+                WorkInfo.getInstance().setFinishStartUrlsNum(1);
                 if(!this.prefix.equals("")){
                     List<String> temp = html.xPath(this.xPath);
                     List<String> targetUrls = new ArrayList<>();

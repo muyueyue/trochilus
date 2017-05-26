@@ -4,6 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.*;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+
 /**
  * Created by jiahao on 17-5-15.
  *
@@ -18,13 +22,22 @@ public class SpiderService {
      * @return
      */
     public boolean getSpiderId(){
-        String spiderId = Util.getRandomString();
-        if(StringUtil.isEmpty(spiderId)){
+        try {
+            String spiderId = Util.getRandomString();
+            if(StringUtil.isEmpty(spiderId)){
+                return false;
+            }
+            Config.spiderId = spiderId;
+            File file = new File(Config.spiderIdPath);
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+            bufferedWriter.write(spiderId);
+            bufferedWriter.close();
+            logger.info("生成的爬虫唯一标识为: {}", spiderId);
+            return true;
+        }catch (Exception e){
+            logger.error("存放spiderId出错");
             return false;
         }
-        Config.spiderId = spiderId;
-        logger.info("生成的爬虫唯一标识为: {}", spiderId);
-        return true;
     }
 
     public boolean register(){

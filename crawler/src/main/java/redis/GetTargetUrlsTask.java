@@ -2,13 +2,11 @@ package redis;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import manage.WorkInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import thread.URLQueue;
-import utils.Config;
-import utils.Method;
-import utils.Request;
-import utils.Response;
+import utils.*;
 
 /**
  * Created by jiahao on 17-5-3.
@@ -37,10 +35,11 @@ public class GetTargetUrlsTask implements Runnable{
                         urlQueue.addURLToTargetQueue(targetUrls.getJSONObject(i).getString("targetUrl"));
                     }*/
                     JSONObject targetUrl = response.getJsonObject("content");
-                    if(targetUrl == null){
+                    if(targetUrl == null || StringUtil.isEmpty(targetUrl.getString("targetUrl"))){
                         continue;
                     }
                     urlQueue.addURLToTargetQueue(targetUrl.getString("targetUrl"));
+                    WorkInfo.getInstance().setTargetUrls(1);
                 }else {
                     logger.error("获取Master中的targetUrl失败");
                 }

@@ -10,10 +10,7 @@ import name.pjh.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by jiahao on 17-5-4.
@@ -42,4 +39,35 @@ public class SpiderApi {
        }
         return new Response().error().errorMeg("爬虫已存在，注册失败");
     }
+
+    @PostMapping("/workInfo")
+    public Response workInfo(@RequestBody String body){
+        logger.info("收到爬虫报告工作情况的命令:{}", body);
+        JSONObject param = JSONObject.parseObject(body);
+        if (spiderService.workInfo(param)){
+            return new Response().success();
+        }
+        return new Response().error().errorMeg("更新爬虫的工作情况出错");
+    }
+
+    @GetMapping("/getSpiderWorkInfo")
+    public Response getSpiderWorkInfo(@RequestParam("spiderId") String spiderId){
+        logger.info("收到查询爬虫{}工作情况的命令", spiderId);
+        JSONObject content = spiderService.getSpiderWorkInfo(spiderId);
+        if(content == null){
+            return new Response().error().errorMeg("获取爬虫的工作情况出错");
+        }
+        return new Response().success().content(content);
+    }
+
+    @GetMapping("/getAllSpiderWorkInfo")
+    public Response getSpiderWorkInfo(){
+        logger.info("收到查询所有爬虫工作情况的命令");
+        JSONObject content = spiderService.getAllWorkInfo();
+        if(content == null){
+            return new Response().error().errorMeg("获取所有爬虫的工作情况出错");
+        }
+        return new Response().success().content(content);
+    }
+
 }

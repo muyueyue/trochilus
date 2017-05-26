@@ -2,7 +2,6 @@ package parse;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +34,9 @@ public class Html {
         return Select.xPath(this.document, xPath);
     }
 
+    public String xPathOne(String xPath){
+        return Select.xPath(this.document, xPath).get(0);
+    }
     public List<String> regex(String regex){
         return Select.regex(regex);
     }

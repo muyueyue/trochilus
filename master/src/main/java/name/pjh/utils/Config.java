@@ -18,4 +18,8 @@ public class Config {
     public static String redisStartUrls = "startUrls";
 
     public static String urlHash = "urlHash";
+
+    public volatile static long startUlrsTotal = 0;
+
+    public volatile static long targetUrlslTotal = 0;
 }

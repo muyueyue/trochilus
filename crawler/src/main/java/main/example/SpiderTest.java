@@ -14,9 +14,9 @@ public class SpiderTest {
     public static void main(String[] args) throws DBException{
         Spider spider = new Spider();
         spider.addToTargetQueue("//dl[@class='contentList']/dd/a/@href", "http://www.pkulaw.cn")
-                .putField("content", "//div[@id='divFullText']/html()", ParseMethod.XPATH)
-                .thread(10)
-                .setMasterInfo("http://120.25.254.235:8080")
+                .putField("content", "//allText()", ParseMethod.XPATH)
+                .thread(20)
+                .setMasterInfo("http://127.0.0.1:8080")
                 .run();
     }
 }

@@ -1,5 +1,9 @@
 package utils;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
+
 /**
  * 全局的配置类
  * Created by pjh on 2017/1/28.
@@ -47,4 +51,8 @@ public class Config {
     public static String masterAddr;
 
     public static String spiderId;
+
+    public static String spiderIdPath = "/home/hadoop/hadoop/spider/spiderId";
+
+    public static BlockingQueue<String> caseQueue = new LinkedBlockingQueue<>();
 }

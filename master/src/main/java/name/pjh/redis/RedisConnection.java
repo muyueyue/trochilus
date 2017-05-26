@@ -23,12 +23,12 @@ public class RedisConnection {
     static {
         try{
             JedisPoolConfig config = new JedisPoolConfig();
-            config.setMaxTotal(5000);
-            config.setMaxIdle(10);
+            config.setMaxTotal(1000000);
+            //config.setMaxIdle(10);
             config.setMaxWaitMillis(10000);
-            config.setTestOnBorrow(true);
-            config.setTestOnReturn(true);
-            jedisPool = new JedisPool(config, Config.redisIP, Config.redisPort);
+            //config.setTestOnBorrow(true);
+            //config.setTestOnReturn(true);
+            jedisPool = new JedisPool(config, Config.redisIP, Config.redisPort, 100000);
         }catch (Exception e){
             logger.error("初始化Redis连接池出错: {}", e);
         }
@@ -55,7 +55,7 @@ public class RedisConnection {
      * @param jedis
      */
     public static synchronized void returnJedis(Jedis jedis){
-        if(jedisPool == null){
+        if(jedisPool == null || jedis == null){
             return;
         }
         jedisPool.returnResource(jedis);
