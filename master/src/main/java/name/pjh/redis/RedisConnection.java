@@ -7,6 +7,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import javax.annotation.PreDestroy;
+
 /**
  * Created by jiahao on 17-5-3.
  *
@@ -18,17 +20,17 @@ public class RedisConnection {
 
     private final static Logger logger = LoggerFactory.getLogger(RedisConnection.class);
 
-    private static JedisPool jedisPool = null;
+    private static JedisPool jedisPool;
 
     static {
         try{
             JedisPoolConfig config = new JedisPoolConfig();
-            config.setMaxTotal(1000000);
-            //config.setMaxIdle(10);
+            config.setMaxTotal(-1);
+            config.setMaxIdle(-1);
             config.setMaxWaitMillis(10000);
-            //config.setTestOnBorrow(true);
-            //config.setTestOnReturn(true);
-            jedisPool = new JedisPool(config, Config.redisIP, Config.redisPort, 100000);
+            config.setTestOnBorrow(true);
+            config.setTestOnReturn(true);
+            jedisPool = new JedisPool(config, Config.redisIP, Config.redisPort, 0);
         }catch (Exception e){
             logger.error("初始化Redis连接池出错: {}", e);
         }
@@ -49,15 +51,8 @@ public class RedisConnection {
         return jedis;
     }
 
-
-    /**
-     * 将Redis连接放回连接池
-     * @param jedis
-     */
-    public static synchronized void returnJedis(Jedis jedis){
-        if(jedisPool == null || jedis == null){
-            return;
-        }
-        jedisPool.returnResource(jedis);
+    @PreDestroy
+    public void close(){
+        jedisPool.close();
     }
 }

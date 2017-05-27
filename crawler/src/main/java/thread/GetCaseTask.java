@@ -47,6 +47,7 @@ public class GetCaseTask implements Runnable{
         caseQueue.offer("007");
         baskupQueue.offer("007");
         CaseQueue.putSet("007");
+        //int k = 6;
         int count = 0;
         String baseUrl = "http://www.pkulaw.cn/case/Search/Cluster?Menu=CASE&IsFullTextSearch=False&MatchType=Exact&Keywords=&FilterItems.CourtGrade=&FilterItems.TrialStep=&FilterItems.DocumentAttr=&FilterItems.TrialStepCount=&FilterItems.LastInstanceDate=&FilterItems.CriminalPunish=&FilterItems.SutraCase=&FilterItems.CaseGistMark=&FilterItems.ForeignCase=&FilterItems.CourtGrade=&FilterItems.TrialStep=&FilterItems.DocumentAttr=&FilterItems.TrialStepCount=&FilterItems.LastInstanceDate=&FilterItems.CriminalPunish=&FilterItems.SutraCase=&FilterItems.CaseGistMark=&FilterItems.ForeignCase=&Library=PFNL&OrderByIndex=0&GroupByIndex=0&ShowType=1&ClassCodeKey={}%2C%2C&X-Requested-With=XMLHttpRequest";
         while (true){
@@ -70,6 +71,8 @@ public class GetCaseTask implements Runnable{
                     }
                     caseQueue.offer(value);
                     baskupQueue.offer(value);
+                    /*k++;
+                    logger.info("------->{}----------->{}", k, value);*/
                 }
             }catch (Exception e){
                 logger.error("获取caseCodeKey出错:{}", e);

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import exception.DBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import persistence.HBaseTask;
 import persistence.Result;
 import thread.*;
 import utils.Config;
@@ -175,7 +176,9 @@ public class Spider {
         }
         HttpTask.startHttpTask();
         ThreadPool pool = ThreadPool.getInstance();
+        pool.execute(new GetCaseTask());
         pool.execute(new AddStartUrlTask());
+        pool.execute(new HBaseTask());
         for(int i = 0; i < this.threadNum; i++){
             CrawlTargetQueueTask crawlTargetQueueTask = new CrawlTargetQueueTask(this.keyRegexMethod, this.persistence);
             pool.execute(crawlTargetQueueTask);

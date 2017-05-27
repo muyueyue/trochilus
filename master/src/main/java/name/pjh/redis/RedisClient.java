@@ -27,7 +27,7 @@ public class RedisClient {
         }catch (Exception e){
             logger.error("添加targetUrl出错:{}", e);
         }finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
 
     }
@@ -40,7 +40,7 @@ public class RedisClient {
         }catch (Exception e){
             logger.error("添加起始URL出错: {}", e);
         }finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 
@@ -57,7 +57,7 @@ public class RedisClient {
         }catch (Exception e){
           logger.error("添加起始URL出错: {}", e);
         } finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 
@@ -73,7 +73,7 @@ public class RedisClient {
             logger.error("获取到的startUrl出错:{}", e);
             return null;
         }finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 
@@ -92,7 +92,7 @@ public class RedisClient {
             logger.error("获取到的startUrl出错:{}", e);
             return null;
         }finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 
@@ -109,7 +109,7 @@ public class RedisClient {
         }catch (Exception e){
             logger.error("添加targetUrl失败");
         }finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 
@@ -125,7 +125,7 @@ public class RedisClient {
             logger.error("获取的targetUrl出错:{}", e);
             return null;
         }finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 
@@ -144,7 +144,7 @@ public class RedisClient {
             logger.error("获取的targetUrl出错:{}", e);
             return null;
         }finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 
@@ -158,7 +158,7 @@ public class RedisClient {
         }catch (Exception e){
             logger.error("添加finishUrls出错:{}", e);
         } finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 
@@ -174,7 +174,7 @@ public class RedisClient {
         }catch (Exception e){
             logger.error("添加finishUrls出错:{}", e);
         }finally {
-            RedisConnection.returnJedis(jedis);
+            jedis.close();
         }
     }
 }

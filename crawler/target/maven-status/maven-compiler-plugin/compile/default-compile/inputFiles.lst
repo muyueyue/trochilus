@@ -10,6 +10,7 @@
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/StringUtil.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/ConsolePrint.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/ThreadPool.java
+/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/ResultQueue.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/AddStartUrlTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/Method.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/CrawlStartURLQueueTask.java
@@ -17,11 +18,13 @@
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/dynamicdata/example/DynamicTest.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/Config.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/manage/WorkInfo.java
+/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/CaseQueue.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/redis/GetTargetUrlsTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/Request.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/manage/task/ManageTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/main/SpiderService.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/Response.java
+/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/GetCaseTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/CrawlTargetQueueTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/proxy/GetProxy.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/main/example/SpiderTest.java
@@ -29,10 +32,10 @@
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/main/example/Test.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/parse/PkuParse.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/HttpTask.java
+/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/HBaseTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/proxy/ProxyTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/Site.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/MongoDBJDBC.java
-/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/HbaseJDBC.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/Result.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/ParseMethod.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/process/PageProcess.java

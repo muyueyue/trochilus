@@ -31,7 +31,7 @@ public class AddStartUrlTask implements Runnable{
                     if(count % 100 == 0){
                         Thread.sleep(100000);
                     }
-                    instance.addToCacheStartQueue("http://www.pkulaw.cn/case/Search/Record?Menu=CASE&IsFullTextSearch=False&MatchType=Exact&Keywords=&OrderByIndex=0&GroupByIndex=0&ShowType=1&ClassCodeKey=00"+caseCodeKey+"%2C%2C&OrderByIndex=0&GroupByIndex=0&ShowType=1&ClassCodeKey=00"+caseCodeKey+"%2C%2C&Library=PFNL&FilterItems.CourtGrade=&FilterItems.TrialStep=&FilterItems.DocumentAttr=&FilterItems.TrialStepCount=&FilterItems.LastInstanceDate=&FilterItems.CriminalPunish=&FilterItems.SutraCase=&FilterItems.CaseGistMark=&FilterItems.ForeignCase=&SubKeyword=%E5%9C%A8%E7%BB%93%E6%9E%9C%E7%9A%84%E6%A0%87%E9%A2%98%E4%B8%AD%E6%A3%80%E7%B4%A2&GroupIndex=&GroupValue=&TitleKeywords=&FullTextKeywords=&Pager.PageSize=20&Pager.PageIndex="+j+"&X-Requested-With=XMLHttpRequest");
+                    instance.addToCacheStartQueue("http://www.pkulaw.cn/case/Search/Record?Menu=CASE&IsFullTextSearch=False&MatchType=Exact&Keywords=&OrderByIndex=0&GroupByIndex=0&ShowType=1&ClassCodeKey="+caseCodeKey+"%2C%2C&OrderByIndex=0&GroupByIndex=0&ShowType=1&ClassCodeKey="+caseCodeKey+"%2C%2C&Library=PFNL&FilterItems.CourtGrade=&FilterItems.TrialStep=&FilterItems.DocumentAttr=&FilterItems.TrialStepCount=&FilterItems.LastInstanceDate=&FilterItems.CriminalPunish=&FilterItems.SutraCase=&FilterItems.CaseGistMark=&FilterItems.ForeignCase=&SubKeyword=%E5%9C%A8%E7%BB%93%E6%9E%9C%E7%9A%84%E6%A0%87%E9%A2%98%E4%B8%AD%E6%A3%80%E7%B4%A2&GroupIndex=&GroupValue=&TitleKeywords=&FullTextKeywords=&Pager.PageSize=20&Pager.PageIndex="+j+"&X-Requested-With=XMLHttpRequest");
                     count++;
                 }
             }

@@ -55,4 +55,6 @@ public class Config {
     public static String spiderIdPath = "/home/hadoop/hadoop/spider/spiderId";
 
     public static BlockingQueue<String> caseQueue = new LinkedBlockingQueue<>();
+
+    public static String HBaseUrls = "http://172.20.94.108:18080/insertHbase";
 }

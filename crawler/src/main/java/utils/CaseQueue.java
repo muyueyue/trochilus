@@ -3,6 +3,7 @@ package utils;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -20,6 +21,7 @@ public class CaseQueue {
 
     static {
         caseQueue = new LinkedBlockingQueue<>();
+        backupCaseQueue = new LinkedBlockingDeque<>();
         caseSet = new HashSet<>();
     }
 
