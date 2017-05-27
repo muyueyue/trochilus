@@ -21,6 +21,6 @@ public class DataPersistence {
     private static final Logger logger = LoggerFactory.getLogger(DataPersistence.class);
 
     public static void insert(JSONObject jsonObject){
-        MongoDBJDBC.insert(jsonObject);
+        MongoDBJDBC.insert("spider", jsonObject);
     }
 }

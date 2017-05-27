@@ -20,6 +20,7 @@ public class CaseQueue {
 
     static {
         caseQueue = new LinkedBlockingQueue<>();
+        backupCaseQueue = new LinkedBlockingQueue<>();
         caseSet = new HashSet<>();
     }
 

@@ -1,17 +1,19 @@
 package persistence;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.Config;
 import org.bson.Document;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 /**
  * Created by pjh on 2017/2/10.
  *
@@ -43,47 +45,42 @@ public class MongoDBJDBC {
         return mongoDatabase;
     }
 
-    public static void insert(String key, String value){
-        getMongoDatabase();
-        MongoCollection<Document> collection = mongoDatabase.getCollection(Config.dbCollection);
-        Document document = new Document(key, value);
-        collection.insertOne(document);
-    }
-
-    public static void insert(HashMap<String, String> map){
-        getMongoDatabase();
-        Document document = new Document();
-        Iterator iterator = map.entrySet().iterator();
-        while (iterator.hasNext()){
-            Map.Entry<String, String> entry = (Map.Entry<String, String>) iterator.next();
-            document.append(entry.getKey(), entry.getValue());
+    public static void insert(String dbCollection, JSONObject jsonObject){
+        try {
+            getMongoDatabase();
+            if(mongoDatabase == null){
+                return;
+            }
+            Document document = new Document();
+            for(Map.Entry<String, Object> entry : jsonObject.entrySet()){
+                document.append(entry.getKey(), (String)entry.getValue());
+            }
+            MongoCollection<Document> collection = mongoDatabase.getCollection(dbCollection);
+            collection.insertOne(document);
+        }catch (Exception e){
+            logger.error("数据插入出错:", e);
         }
-        MongoCollection<Document> collection = mongoDatabase.getCollection(Config.dbCollection);
-        collection.insertOne(document);
     }
 
-    public static void insert(List<Document> list){
-        getMongoDatabase();
-        MongoCollection<Document> collection = mongoDatabase.getCollection(Config.dbCollection);
-        collection.insertMany(list);
-    }
-
-    public static void insert(Document document){
-        getMongoDatabase();
-        MongoCollection<Document> collection = mongoDatabase.getCollection(Config.dbCollection);
-        collection.insertOne(document);
-    }
-
-    public static void insert(JSONObject jsonObject){
-        getMongoDatabase();
-        if(mongoDatabase == null){
-            return;
+    public List<String> getStartUrls(String dbCollection, long rowId){
+        if(rowId > Config.endId){
+            return null;
         }
-        Document document = new Document();
-        for(Map.Entry<String, Object> entry : jsonObject.entrySet()){
-            document.append(entry.getKey(), (String)entry.getValue());
+        try {
+            getMongoDatabase();
+            MongoCollection<Document> collection = mongoDatabase.getCollection(dbCollection);
+            FindIterable<Document> findIterable = collection.find(new BasicDBObject("rowId", new BasicDBObject("$gt", rowId))).limit(Config.urlSize);
+            MongoCursor<Document> mongoCursor = findIterable.iterator();
+            List<String> list = new ArrayList<>();
+            while(mongoCursor.hasNext()){
+                String startUrl = mongoCursor.next().getString("startUrl");
+                logger.info(startUrl);
+                list.add(startUrl);
+            }
+            return list;
+        }catch (Exception e){
+            logger.error("数据查询出错:", e);
+            return null;
         }
-        MongoCollection<Document> collection = mongoDatabase.getCollection(Config.dbCollection);
-        collection.insertOne(document);
     }
 }

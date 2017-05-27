@@ -28,7 +28,7 @@ public class Config {
 
     public static String databaseName = "spiders";
 
-    public static String dbCollection = "spiders";
+    public static String dbCollection = "casecodekey";
 
     public static String filePath = "";
 
@@ -55,4 +55,10 @@ public class Config {
     public static String spiderIdPath = "/home/hadoop/hadoop/spider/spiderId";
 
     public static BlockingQueue<String> caseQueue = new LinkedBlockingQueue<>();
+
+    public static int urlSize = 20;
+
+    public static long startId;
+
+    public static long endId;
 }
