@@ -2,6 +2,7 @@ parse/Html.class
 persistence/Result.class
 persistence/DataPersistence.class
 main/SpiderService.class
+pkulaw/HBaseTask.class
 redis/AddToTargetUrlsTask.class
 main/Spider.class
 redis/AddToStartUrlsTask.class
@@ -35,7 +36,6 @@ utils/Util.class
 utils/ParseMethod.class
 proxy/ParseProxy.class
 redis/AddToFinishUrlsTask.class
-persistence/HBaseTask.class
 exception/DBException.class
 thread/ThreadPool.class
 thread/GetCaseTask.class

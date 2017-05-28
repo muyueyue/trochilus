@@ -11,7 +11,6 @@
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/CrawlTargetQueueTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/proxy/GetProxy.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/parse/PkuParse.java
-/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/HBaseTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/proxy/ProxyTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/Site.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/MongoDBJDBC.java
@@ -42,6 +41,7 @@
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/main/Spider.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/main/example/Test.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/HttpTask.java
+/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/pkulaw/HBaseTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/process/PageProcess.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/redis/AddToStartUrlsTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/DataPersistence.java

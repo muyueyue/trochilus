@@ -29,9 +29,10 @@ public class TargetUrlsTask implements Runnable{
             BlockingQueue<String> targetUrlsQueue = URLQueue.getInstance().getTargetQueue();
             JSONObject result = new JSONObject();
             while (true){
-                String targetUrl =targetUrlsQueue.poll();
+                String targetUrl = targetUrlsQueue.poll();
                 if(StringUtil.isEmpty(targetUrl)){
                     Thread.sleep(1000);
+                    continue;
                 }
                 String temp = targetUrl.substring(targetUrl.indexOf("pfnl"), targetUrl.indexOf(".html"));
                 String library = temp.substring(0, 4);

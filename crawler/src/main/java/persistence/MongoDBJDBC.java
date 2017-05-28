@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.Config;
 import org.bson.Document;
+import utils.StringUtil;
 
 import java.util.*;
 
@@ -62,7 +63,7 @@ public class MongoDBJDBC {
         }
     }
 
-    public List<String> getStartUrls(String dbCollection, long rowId){
+    public static List<String> getStartUrls(String dbCollection, long rowId){
         if(rowId > Config.endId){
             return null;
         }
@@ -73,8 +74,9 @@ public class MongoDBJDBC {
             MongoCursor<Document> mongoCursor = findIterable.iterator();
             List<String> list = new ArrayList<>();
             while(mongoCursor.hasNext()){
-                String startUrl = mongoCursor.next().getString("startUrl");
-                logger.info(startUrl);
+                Document data = mongoCursor.next();
+                String startUrl = data.getString("startUrl");
+                //logger.info("{}", data.getInteger("rowId"));
                 list.add(startUrl);
             }
             return list;
@@ -82,5 +84,10 @@ public class MongoDBJDBC {
             logger.error("数据查询出错:", e);
             return null;
         }
+    }
+
+    public static void main(String[] args) {
+        Config.endId = 1000;
+        System.out.println(StringUtil.listToString(getStartUrls("starturls", 0)));
     }
 }

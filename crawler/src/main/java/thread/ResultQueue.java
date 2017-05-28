@@ -37,4 +37,8 @@ public class ResultQueue {
             return null;
         }
     }
+
+    public static void rePut(JSONObject jsonObject){
+        result.offer(jsonObject);
+    }
 }

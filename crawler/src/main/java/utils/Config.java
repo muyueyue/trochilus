@@ -22,7 +22,7 @@ public class Config {
 
     public static String contentType = "application/json";
 
-    public static String mongoDBHost = "localhost";
+    public static String mongoDBHost = "172.20.94.108";
 
     public static int mongoDBPort = 27017;
 
@@ -56,9 +56,9 @@ public class Config {
 
     public static BlockingQueue<String> caseQueue = new LinkedBlockingQueue<>();
 
-    public static int urlSize = 20;
-
-    public static long startId;
+    public static int urlSize = 10;
 
     public static long endId;
+
+    public static long urlIndex;
 }

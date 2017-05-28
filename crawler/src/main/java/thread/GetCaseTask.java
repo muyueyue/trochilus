@@ -83,7 +83,7 @@ public class GetCaseTask implements Runnable{
                     caseCodeKeyJson.fluentPut("codeKey", value)
                             .fluentPut("total", total);
                     MongoDBJDBC.insert("casecodekey", caseCodeKeyJson);
-                    int pageSize = 50, pageIndex;
+                    int pageSize = 100, pageIndex;
                     int totalRow = Integer.valueOf(total).intValue();
                     if(totalRow % pageSize == 0){
                         pageIndex = totalRow / pageSize;
@@ -91,7 +91,7 @@ public class GetCaseTask implements Runnable{
                             pageIndex = 500;
                         }
                     }else {
-                        pageIndex = totalRow / pageSize + 1;
+                        pageIndex = (totalRow / pageSize) + 1;
                         if(pageIndex > 500){
                             pageIndex = 500;
                         }

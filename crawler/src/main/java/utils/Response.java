@@ -46,6 +46,9 @@ public class Response {
         }
     }
 
+    public int getStatus(){
+        return httpResponse.getStatusLine().getStatusCode();
+    }
     public boolean isSuccess(){
         JSONObject jsonObject = JSONObject.parseObject(this.content);
         return jsonObject.containsKey("isSuccess") && jsonObject.getBooleanValue("isSuccess");
