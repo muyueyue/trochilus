@@ -1,4 +1,5 @@
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/dynamicdata/SeleniumDownloader.java
+/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/pkulaw/OutputException.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/parse/Select.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/URLQueue.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/download/Downloader.java
@@ -16,6 +17,7 @@
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/MongoDBJDBC.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/Result.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/ParseMethod.java
+/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/pkulaw/InsertHbase.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/redis/GetStartUrlsTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/utils/BloomFilter.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/parse/Page.java
@@ -41,9 +43,9 @@
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/main/Spider.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/main/example/Test.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/thread/HttpTask.java
-/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/pkulaw/HBaseTask.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/process/PageProcess.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/redis/AddToStartUrlsTask.java
+/home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/exception/MyUncaughtExceptionHandler.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/DataPersistence.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/exception/DBException.java
 /home/jiahao/IdeaProjects/trochilus/crawler/src/main/java/persistence/FilePersistence.java

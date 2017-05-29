@@ -14,7 +14,7 @@ public class MyConfigurerAdapter extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 多个拦截器组成一个拦截器链
-        registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/**");
-        super.addInterceptors(registry);
+        //registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/**");
+        //super.addInterceptors(registry);
     }
 }

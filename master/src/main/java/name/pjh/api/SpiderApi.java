@@ -70,4 +70,10 @@ public class SpiderApi {
         return new Response().success().content(content);
     }
 
+    @PostMapping("/test")
+    public Response test(@RequestBody String body){
+        JSONObject param = JSONObject.parseObject(body);
+        logger.info("{}", param.getString("content"));
+        return new Response().success();
+    }
 }

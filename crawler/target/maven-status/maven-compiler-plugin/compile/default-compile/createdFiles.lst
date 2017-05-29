@@ -2,7 +2,6 @@ parse/Html.class
 persistence/Result.class
 persistence/DataPersistence.class
 main/SpiderService.class
-pkulaw/HBaseTask.class
 redis/AddToTargetUrlsTask.class
 main/Spider.class
 redis/AddToStartUrlsTask.class
@@ -11,10 +10,12 @@ parse/Select.class
 parse/PkuParse.class
 utils/BloomFilter$Hash.class
 dynamicdata/example/DynamicTest.class
+exception/MyUncaughtExceptionHandler.class
 manage/WorkInfo.class
 download/Downloader.class
 pkulaw/TargetUrlsTask.class
 utils/Response.class
+pkulaw/InsertHbase.class
 persistence/FilePersistence.class
 utils/BloomFilter.class
 utils/StringUtil.class
@@ -32,6 +33,7 @@ utils/Config.class
 thread/CrawlStartURLQueueTask.class
 dynamicdata/SeleniumDownloader.class
 manage/task/ManageTask.class
+pkulaw/OutputException.class
 utils/Util.class
 utils/ParseMethod.class
 proxy/ParseProxy.class

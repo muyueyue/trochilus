@@ -18,7 +18,10 @@ public class Test {
                 .setParams("gid", "1970324875435986")
                 .setParams("loginSucc","0");
         Response response = request.send();
-        System.out.println(response.getContent());
+        //System.out.println(response.getContent());
+        Request re = new Request("http://127.0.0.1:8080/master/spider/test", Method.POST);
+        re.setParams("content", response.getContent());
+        re.send();
 
      /* String url = "http://www.pkulaw.cn/case/pfnl_1970324846018188.html?match=Exact";
       String temp = url.substring(url.indexOf("pfnl"), url.indexOf(".html"));

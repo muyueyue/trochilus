@@ -163,7 +163,7 @@ public class Request {
             }
         }
         try {
-            StringEntity entity = new StringEntity(jsonObject.toString());
+            StringEntity entity = new StringEntity(jsonObject.toString(),"UTF-8");
             entity.setContentEncoding(this.charset);
             entity.setContentType(this.contentType);
             httpPost.setEntity(entity);
@@ -172,6 +172,7 @@ public class Request {
             return null;
         }
         httpPost.setHeader("User-Agent", Config.userAgent);
+        //httpPost.setHeader("Content-Type", "text/html;charset=UTF-8");
         return httpPost;
     }
 
@@ -195,6 +196,7 @@ public class Request {
         }
         HttpGet httpGet = new HttpGet(this.url);
         httpGet.setHeader("User-Agent", Config.userAgent);
+        //httpGet.setHeader("Content-Type", "text/html;charset=UTF-8");
         return httpGet;
     }
 
