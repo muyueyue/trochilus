@@ -1,6 +1,5 @@
 package main.example;
 
-import org.apache.regexp.RE;
 import utils.Method;
 import utils.Request;
 import utils.Response;

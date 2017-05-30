@@ -1,13 +1,7 @@
 package dynamicdata;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import parse.Html;
-import java.util.List;
 
 /**
  * Created by jiahao on 17-5-16.
@@ -27,7 +21,7 @@ public class SeleniumDownloader {
         System.setProperty("webdriver.chrome.driver","/home/jiahao/tool/chromedriver");
     }
 
-    public Html getHtml(String url){
+    /*public Html getHtml(String url){
         try {
             WebDriver webDriver = new ChromeDriver();
             webDriver.get(url);
@@ -41,5 +35,5 @@ public class SeleniumDownloader {
             logger.error("获取动态加载的数据出错:{}", e);
             return null;
         }
-    }
+    }*/
 }

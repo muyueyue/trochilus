@@ -9,7 +9,7 @@ import dynamicdata.SeleniumDownloader;
  */
 public class DynamicTest {
     public static void main(String[] args) {
-        SeleniumDownloader seleniumDownloader = new SeleniumDownloader();
-        seleniumDownloader.getHtml("http://www.toutiao.com");
+        //SeleniumDownloader seleniumDownloader = new SeleniumDownloader();
+        //seleniumDownloader.getHtml("http://www.toutiao.com");
     }
 }

@@ -1,6 +1,7 @@
 package main.example;
 
 import exception.DBException;
+import org.apache.log4j.PropertyConfigurator;
 import pkulaw.StartUrlsTask;
 import pkulaw.TargetUrlsTask;
 import thread.ThreadPool;

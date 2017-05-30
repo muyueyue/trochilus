@@ -31,54 +31,61 @@ public class TargetUrlsTask implements Runnable{
             JSONObject result = new JSONObject();
             String  realUrl = "http://www.pkulaw.cn/case/FullText/_getFulltext";
             while (true){
-                if(Config.urlIndex > Config.endId && targetUrlsQueue.size() == 0 && startUrlsQueue.size() == 0){
-                    logger.info("爬虫任务全部完成");
-                    System.exit(0);
-                }
-                logger.info("目前targetUrls队列的大小为:{}", targetUrlsQueue.size());
-                String targetUrl = targetUrlsQueue.poll();
-                if(StringUtil.isEmpty(targetUrl)){
-                    logger.error("targetUrls队列目前为空");
-                    Thread.sleep(5000);
-                    continue;
-                }
-                String temp = targetUrl.substring(targetUrl.indexOf("pfnl"), targetUrl.indexOf(".html"));
-                String library = temp.substring(0, 4);
-                String gid = temp.substring(temp.indexOf("_") + 1, temp.length());
-                Request request_1 = new Request(realUrl, Method.POST);
-                Request request_2 = new Request(targetUrl, Method.GET);
-                request_1.setParams("library", library)
-                        .setParams("gid", gid)
-                        .setParams("loginSucc", "0");
-                Html html_1 = Downloader.getHtml(request_1);
-                Html html_2 = Downloader.getHtml(request_2);
-                if(html_1 == null || html_2 == null){
-                    logger.error("根据targetUrls获取的页面数据为空");
-                    continue;
-                }
-                List<String> list = html_1.xPath("//allText()");
-                List<String> list_2 = html_2.xPath("//table[@class='articleInfo']/allText()");
-                List<String> list_3 = html_2.xPath("//table[@class='articleInfo']/tbody/tr[1]/td[2]/a/text()");
-                String rowKey = html_2.xPathOne("//table[@class='articleInfo']/tbody/tr[2]/td[2]/text()");
-                String title = html_2.xPathOne("//div[@class='article']/h3/text()");
-                result.put("content", StringUtil.listToString(list));
-                result.put("info", StringUtil.listToString(list_2));
-                String ay = "";
-                for(String string : list_3){
-                    ay = ay + string + "/";
-                }
-                rowKey = rowKey + "-" + ay;
-                result.put("rowKey", rowKey);
-                result.put("title", title);
-                result.put("url", targetUrl);
-                logger.info("data:{}", result.toString());
-                if(!InsertHbase.insert(result)){
-                    targetUrlsQueue.offer(targetUrl);
+                try {
+                    if(Config.urlIndex > Config.endId && targetUrlsQueue.size() == 0 && startUrlsQueue.size() == 0){
+                        logger.info("爬虫任务全部完成");
+                        System.exit(0);
+                    }
+                    logger.info("目前targetUrls队列的大小为:{}", targetUrlsQueue.size());
+                    String targetUrl = targetUrlsQueue.poll();
+                    if(StringUtil.isEmpty(targetUrl)){
+                        logger.error("targetUrls队列目前为空");
+                        Thread.sleep(5000);
+                        continue;
+                    }
+                    String temp = targetUrl.substring(targetUrl.indexOf("pfnl"), targetUrl.indexOf(".html"));
+                    String library = temp.substring(0, 4);
+                    String gid = temp.substring(temp.indexOf("_") + 1, temp.length());
+                    Request request_1 = new Request(realUrl, Method.POST);
+                    Request request_2 = new Request(targetUrl, Method.GET);
+                    request_1.setParams("library", library)
+                            .setParams("gid", gid)
+                            .setParams("loginSucc", "0");
+                    Html html_1 = Downloader.getHtml(request_1);
+                    Html html_2 = Downloader.getHtml(request_2);
+                    if(html_1 == null || html_2 == null){
+                        logger.error("根据targetUrls获取的页面数据为空");
+                        continue;
+                    }
+                    List<String> list = html_1.xPath("//allText()");
+                    List<String> list_2 = html_2.xPath("//table[@class='articleInfo']/allText()");
+                    List<String> list_3 = html_2.xPath("//table[@class='articleInfo']/tbody/tr[1]/td[2]/a/text()");
+                    String rowKey = html_2.xPathOne("//table[@class='articleInfo']/tbody/tr[2]/td[2]/text()");
+                    String title = html_2.xPathOne("//div[@class='article']/h3/text()");
+                    result.put("content", StringUtil.listToString(list));
+                    result.put("info", StringUtil.listToString(list_2));
+                    String ay = "";
+                    for(String string : list_3){
+                        ay = ay + string + "/";
+                    }
+                    rowKey = rowKey + "-" + ay;
+                    result.put("rowKey", rowKey);
+                    result.put("title", title);
+                    result.put("url", targetUrl);
+                    logger.info("data:{}", result.toString());
+                    if(!InsertHbase.insert(result)){
+                        targetUrlsQueue.offer(targetUrl);
+                    }
+                }catch (Exception e){
+                    OutputException.output("/home/hadoop/hadoop/spider/logs/error.log", "解析targetUrls出错:" + e.toString());
+                    //OutputException.output("/home/jiahao/myjar/error.log", "解析targetUrls出错:" + e.toString());
+                    logger.error("解析targetUrls出错:", e);
                 }
             }
         }catch (Exception e){
             ThreadPool.getInstance().execute(new TargetUrlsTask());
             OutputException.output("/home/hadoop/hadoop/spider/logs/error.log", "解析targetUrls出错:" + e.toString());
+            //OutputException.output("/home/jiahao/myjar/error.log", "解析targetUrls出错:" + e.toString());
             logger.error("解析targetUrls出错:", e);
         }
     }
