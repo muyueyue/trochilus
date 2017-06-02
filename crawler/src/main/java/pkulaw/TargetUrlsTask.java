@@ -61,7 +61,7 @@ public class TargetUrlsTask implements Runnable{
                     List<String> list_2 = html_2.xPath("//table[@class='articleInfo']/allText()");
                     List<String> list_3 = html_2.xPath("//table[@class='articleInfo']/tbody/tr[1]/td[2]/a/text()");
                     String rowKey = html_2.xPathOne("//table[@class='articleInfo']/tbody/tr[2]/td[2]/text()");
-                    String title = html_2.xPathOne("//div[@class='article']/h3/text()");
+                    String title = html_1.xPathOne("//font[@class='MTitle']/text()");
                     result.put("content", StringUtil.listToString(list));
                     result.put("info", StringUtil.listToString(list_2));
                     String ay = "";
@@ -73,9 +73,9 @@ public class TargetUrlsTask implements Runnable{
                     result.put("title", title);
                     result.put("url", targetUrl);
                     logger.info("data:{}", result.toString());
-                    if(!InsertHbase.insert(result)){
+                    /*if(!InsertHbase.insert(result)){
                         targetUrlsQueue.offer(targetUrl);
-                    }
+                    }*/
                 }catch (Exception e){
                     OutputException.output("/home/hadoop/hadoop/spider/logs/error.log", "解析targetUrls出错:" + e.toString());
                     //OutputException.output("/home/jiahao/myjar/error.log", "解析targetUrls出错:" + e.toString());

@@ -18,16 +18,25 @@ import java.io.PrintStream;
  */
 public class FilePersistence {
 
+    private static File file;
+
+    private static PrintStream printStream;
+
+    static {
+        try {
+            file = new File(Config.filePath);
+            printStream = new PrintStream(new FileOutputStream(file, true));
+        }catch (IOException e){
+        }
+    }
+
     public static void write(String key, String value) throws IOException{
-        File file = new File(Config.filePath);
         PrintStream printStream = new PrintStream(new FileOutputStream(file, true));
         printStream.append(key + ":" + '\n');
         printStream.append(value + '\n');
     }
 
     public static void write(JSONObject jsonObject) throws IOException{
-        File file = new File(Config.filePath);
-        PrintStream printStream = new PrintStream(new FileOutputStream(file, true));
         printStream.append(jsonObject.toJSONString() + '\n');
     }
 }

@@ -1,16 +1,19 @@
-package thread;
+package pkulaw;
 
 import com.alibaba.fastjson.JSONObject;
 import download.Downloader;
+import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import parse.Html;
+import org.jsoup.nodes.Document;
+import parse.Select;
+import persistence.FilePersistence;
 import persistence.MongoDBJDBC;
-import redis.GetTargetUrlsTask;
+import us.codecraft.xsoup.Xsoup;
 import utils.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -50,9 +53,9 @@ public class GetCaseTask implements Runnable{
         String baseUrl = "http://www.pkulaw.cn/case/Search/Cluster?Menu=CASE&IsFullTextSearch=False&MatchType=Exact&Keywords=&FilterItems.CourtGrade=&FilterItems.TrialStep=&FilterItems.DocumentAttr=&FilterItems.TrialStepCount=&FilterItems.LastInstanceDate=&FilterItems.CriminalPunish=&FilterItems.SutraCase=&FilterItems.CaseGistMark=&FilterItems.ForeignCase=&FilterItems.CourtGrade=&FilterItems.TrialStep=&FilterItems.DocumentAttr=&FilterItems.TrialStepCount=&FilterItems.LastInstanceDate=&FilterItems.CriminalPunish=&FilterItems.SutraCase=&FilterItems.CaseGistMark=&FilterItems.ForeignCase=&Library=PFNL&OrderByIndex=0&GroupByIndex=0&ShowType=1&ClassCodeKey={}%2C%2C&X-Requested-With=XMLHttpRequest";
         while (true){
             try {
-                Thread.sleep(100);
+                //Thread.sleep(100);
                 if(count == 100){
-                    break;
+                    System.exit(0);
                 }
                 String caseCodeKey = caseQueue.poll(5, TimeUnit.SECONDS);
                 JSONObject caseCodeKeyJson = new JSONObject();
@@ -78,12 +81,20 @@ public class GetCaseTask implements Runnable{
                     if(!CaseQueue.putSet(value)){
                         continue;
                     }
-                    logger.info("{}----->{}------>{}", string, value, total);
+                    Document document = Jsoup.parse(string);
+                    String text = Xsoup.select(document, "//a/text()").get();
+                    if(text.indexOf("(") != -1){
+                        text = text.substring(0, text.indexOf("("));
+                    }
+                    logger.info("{}----->{}------->{}------>{}", string, text, value, total);
+                    //logger.info("{}----->{}------>{}", string, value, total);
                     caseQueue.offer(value);
                     caseCodeKeyJson.fluentPut("codeKey", value)
+                            .fluentPut("text", text)
                             .fluentPut("total", total);
-                    MongoDBJDBC.insert("casecodekey", caseCodeKeyJson);
-                    int pageSize = 100, pageIndex;
+                    FilePersistence.write(caseCodeKeyJson);
+                    //MongoDBJDBC.insert("casecodekey", caseCodeKeyJson);
+                    /*int pageSize = 100, pageIndex;
                     int totalRow = Integer.valueOf(total).intValue();
                     if(totalRow % pageSize == 0){
                         pageIndex = totalRow / pageSize;
@@ -102,12 +113,17 @@ public class GetCaseTask implements Runnable{
                         startUrlsJson.fluentPut("rowId", String.valueOf(rowId))
                                 .fluentPut("startUrl", startUrl)
                                 .fluentPut("status", "0");
-                        MongoDBJDBC.insert("starturls", startUrlsJson);
-                    }
+                        //MongoDBJDBC.insert("starturls", startUrlsJson);
+                    }*/
                 }
             }catch (Exception e){
                 logger.error("获取caseCodeKey出错:{}", e);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        GetCaseTask getCaseTask = new GetCaseTask();
+        getCaseTask.run();
     }
 }

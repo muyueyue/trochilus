@@ -76,7 +76,7 @@ public class MongoDBJDBC {
             while(mongoCursor.hasNext()){
                 Document data = mongoCursor.next();
                 String startUrl = data.getString("startUrl");
-                //logger.info("{}", data.getInteger("rowId"));
+                //logger.info("{}", data.getLong("rowId"));
                 list.add(startUrl);
             }
             return list;
@@ -88,6 +88,6 @@ public class MongoDBJDBC {
 
     public static void main(String[] args) {
         Config.endId = 1000;
-        System.out.println(StringUtil.listToString(getStartUrls("starturls", 0)));
+        System.out.println(StringUtil.listToString(getStartUrls("starturls", 30)));
     }
 }

@@ -32,51 +32,14 @@ public class StartUrlsTask implements Runnable{
         try {
             while (true){
                 try {
-                    if(Config.urlIndex >= Config.endId){
-                        logger.info("爬虫的startUrl全部获取完毕");
-                        continue;
-                    }
-                    if(startUrlsQueue.size() == 0 && targetUrlsQueue.size() <= 10){
-                        //从Mongdb中获取startUrl
-                        logger.info("正在从Mongodb中获取startUrls");
-                        logger.info("----------------->urlIndex:{}", Config.urlIndex);
-                        List<String> startUrls = MongoDBJDBC.getStartUrls("starturls", Config.urlIndex);
-                        if(startUrls == null || startUrls.size() == 0){
-                            logger.error("从Mongodb中获取的startUrls为空");
-                            continue;
-                        }
-                        for(String startUrl : startUrls){
-                            logger.info("获取到的startUrl为:{}", startUrl);
-                            startUrlsQueue.offer(startUrl);
-                        }
-                        Config.urlIndex = Config.urlIndex + Config.urlSize;
-                    }
                     logger.info("startUrls队列的大小为:{}", startUrlsQueue.size());
                     String startUrl = startUrlsQueue.poll();
-                    if(StringUtil.isEmpty(startUrl)){
-                        logger.error("startUrls队列为空");
-                        Thread.sleep(1000);
+                    if(targetUrlsQueue.size() > 10){
                         continue;
                     }
-                    Request request = new Request(startUrl, Method.GET);
-                    Html html = Downloader.getHtml(request);
-                    if(html == null){
-                        logger.error("下载startUrl的结果为空");
+                    if(CreateStartUrls.getTargetUrls(targetUrlsQueue, startUrl, pre)){
                         Thread.sleep(1000);
-                        continue;
                     }
-                    List<String> targetUrlsList = html.xPath("//dl[@class='contentList']/dd/a/@href");
-                    if(targetUrlsList== null || targetUrlsList.size() == 0){
-                        logger.error("未解析出targetUrl");
-                        Thread.sleep(1000);
-                        continue;
-                    }
-                    for(String targetUrl : targetUrlsList){
-                        String url = pre.concat(targetUrl);
-                        logger.info("解析出的targetUrl为:{}", url);
-                        targetUrlsQueue.offer(url);
-                    }
-                    Thread.sleep(1000);
                 }catch (Exception e){
                     OutputException.output("/home/hadoop/hadoop/spider/logs/error.log", "解析startUrls出错:" + e.toString());
                     //OutputException.output("/home/jiahao/myjar/error.log", "解析targetUrls出错:" + e.toString());

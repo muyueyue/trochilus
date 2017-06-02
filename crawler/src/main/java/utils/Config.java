@@ -30,7 +30,7 @@ public class Config {
 
     public static String dbCollection = "casecodekey";
 
-    public static String filePath = "";
+    public static String filePath = "/home/jiahao/myjar/casecode.txt";
 
     public static long errorSleepTime = 1000;
 
@@ -61,4 +61,6 @@ public class Config {
     public static long endId;
 
     public static long urlIndex;
+
+    public static String configFilePath;
 }
