@@ -21,7 +21,17 @@ public class CreateStartUrlsTask implements Runnable{
     @Override
     public void run(){
         String config = ReadConfig.read();
-        JSONArray configArray = JSONArray.parseArray(config);
+        JSONArray configArray = new JSONArray();
+        try {
+            configArray = JSONArray.parseArray(config);
+        }catch (Exception e){
+            logger.error("解析配置文件出错，请检查配置文件数据格式:", e);
+            System.exit(1);
+        }
+        if(configArray == null || configArray.size() < 1){
+            logger.error("配置文件为空");
+            System.exit(1);
+        }
         BlockingQueue<String> targetUrls = URLQueue.getInstance().getTargetQueue();
         BlockingQueue<String> startUrls = URLQueue.getInstance().getStartQueue();
         for(int i = 0 ; i < configArray.size(); i++){
@@ -63,6 +73,16 @@ public class CreateStartUrlsTask implements Runnable{
             }catch (Exception e){
                 logger.error("构造startUrls的任务出现异常，已被捕获:", e);
             }
+        }
+        try {
+            while(true){
+                if(targetUrls.size() == 0 && startUrls.size() == 0){
+                    logger.info("爬虫任务结束");
+                    System.exit(0);
+                }
+                Thread.sleep(60000);
+            }
+        }catch (Exception e){
         }
     }
 }

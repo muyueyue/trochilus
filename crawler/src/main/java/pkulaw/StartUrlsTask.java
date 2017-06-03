@@ -32,9 +32,12 @@ public class StartUrlsTask implements Runnable{
         try {
             while (true){
                 try {
+                    if(targetUrlsQueue.size() > 10){
+                        continue;
+                    }
                     logger.info("startUrls队列的大小为:{}", startUrlsQueue.size());
                     String startUrl = startUrlsQueue.poll();
-                    if(targetUrlsQueue.size() > 10){
+                    if(StringUtil.isEmpty(startUrl)){
                         continue;
                     }
                     if(CreateStartUrls.getTargetUrls(targetUrlsQueue, startUrl, pre)){

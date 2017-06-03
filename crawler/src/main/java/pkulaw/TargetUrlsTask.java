@@ -27,15 +27,10 @@ public class TargetUrlsTask implements Runnable{
     public void run(){
         try {
             BlockingQueue<String> targetUrlsQueue = URLQueue.getInstance().getTargetQueue();
-            BlockingQueue<String> startUrlsQueue = URLQueue.getInstance().getStartQueue();
             JSONObject result = new JSONObject();
             String  realUrl = "http://www.pkulaw.cn/case/FullText/_getFulltext";
             while (true){
                 try {
-                    if(Config.urlIndex > Config.endId && targetUrlsQueue.size() == 0 && startUrlsQueue.size() == 0){
-                        logger.info("爬虫任务全部完成");
-                        System.exit(0);
-                    }
                     logger.info("目前targetUrls队列的大小为:{}", targetUrlsQueue.size());
                     String targetUrl = targetUrlsQueue.poll();
                     if(StringUtil.isEmpty(targetUrl)){
