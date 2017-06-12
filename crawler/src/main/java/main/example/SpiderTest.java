@@ -15,7 +15,7 @@ import utils.Config;
 public class SpiderTest {
     public static void main(String[] args) throws DBException{
         if(args.length < 2){
-            System.out.println("请输入配置文件路径,threadNum");
+            System.out.println("请输入配置文件路径,线程数");
             System.exit(1);
         }
         Config.configFilePath = args[0];
